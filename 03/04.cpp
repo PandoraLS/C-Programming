@@ -14,6 +14,7 @@ int main() {
          << "\nhalf of n == " << n / 2
          << "\nsquare root of n == " << sqrt(n)
          << "\n";
+    system("pause");
     return 0;
 }
 
