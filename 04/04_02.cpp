@@ -1,9 +1,9 @@
 #include <iostream>
 using namespace std;
 int main() {
-    constexpr double JPY_USD = 0.0093;  //ÈÕÔª»ãÂÊ
-    constexpr double EUR_USD = 1.0963;  //Å·Ôª»ãÂÊ
-    constexpr double GBP_USD = 1.2325;  //Ó¢°÷»ãÂÊ
+    constexpr double JPY_USD = 0.0093;  //
+    constexpr double EUR_USD = 1.0963;  //
+    constexpr double GBP_USD = 1.2325;  //Ó¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     double number            = 1;
     char unit                = ' ';
     cout << "Please enter a number followed by a unit (J or E or G): \n";
