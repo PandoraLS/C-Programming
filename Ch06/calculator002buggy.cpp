@@ -1,7 +1,8 @@
 //
 // This is example code from Chapter 6.7 "Trying the second version" of
 // "Software - Principles and Practice using C++" by Bjarne Stroustrup
-//
+// 
+// https://github.com/thelastpolaris/Programming-Principles-and-Practice-Using-C-/blob/master/6/calculator002buggy.cpp
 
 /*
 	This file is known as calculator002buggy.cpp
