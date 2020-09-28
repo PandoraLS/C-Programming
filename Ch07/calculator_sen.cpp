@@ -57,11 +57,10 @@ class Token_stream {
 public:
     Token_stream(): full(0), buffer(0) {}
     Token get();                // 从cin中获取字符并以Token类型返回
-    void putback(Token t){      //将symbol返回buffer,如果full=true,get()将使用buffer中的symbol
+    void putback(Token t){      // 将symbol返回buffer,如果full=true,get()将使用buffer中的symbol
         buffer = t;
         full = true;
     }
-
     void ignore(char);      //忽略掉特殊符号之前的所有字符
 };
 
@@ -160,7 +159,7 @@ double get_value(string s){             // 获取variable的值
 }
 
 void set_value(string s, double d){     // 设置variable的值
-    for (int i = 0; i <= names.size(); ++i)
+    for (int i = 0; i <= names.size(); i++)
         if (names[i].name == s){
             names[i].value = d;
             return;
@@ -169,7 +168,7 @@ void set_value(string s, double d){     // 设置variable的值
 }
 
 bool is_declared(string s){             // 检查variable是否已声明
-    for (int i = 0; i < names.size(); ++i)
+    for (int i = 0; i < names.size(); i++)
         if (names[i].name == s)
             return true;
     return false;
