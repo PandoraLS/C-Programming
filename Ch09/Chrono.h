@@ -13,15 +13,21 @@ namespace Chrono {
 
 	class Date {
 	public:
-		class Invalid{};
-		Date(int y, Month m, int d);
-		Date();
-		void add_day(int n);
-		void add_month(int n);
-		void add_year(int n);
+		class Invalid{};						// 作为异常抛出
+		Date(int y, Month m, int d);			// 检查日期合法性并初始化
+		Date();									// 默认构造函数
+		// 默认拷贝操作是可用的
+
+		// 不改变对象的操作：
 		int year() const {return y;};
 		Month month() const {return m;};
 		int day() const {return d;};
+
+		// 改变对象的操作：
+		void add_day(int n);
+		void add_month(int n);
+		void add_year(int n);
+		
 	private:
 		int y;			// 年份
 		Month m;
