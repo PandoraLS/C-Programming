@@ -1,29 +1,35 @@
 /*
  * @Author: seenli 
- * @Date: 2020-10-05 21:37:33 
+ * @Date: 2020-10-06 14:51:56 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-06 14:16:56
+ * @Last Modified time: 2020-10-06 21:26:44
  */
 
-/*
- * 程序依然存在一些bug, 当输入的是小数的时候, 由于cin.get()和cin.putback()的工作机制, 输入的小数点会被识别为非法字符,
- * 但是小数点后的数字确被保留下来成为了下一次输入的第一个数字, 然后就混乱了
- */
-
-
+#include <cfloat>
 #include "std_lib_facilities.h"
 
 int main() {
     constexpr char terminationChar = '|';       // 终止符
-    const string instructions{"输入两个整型数字或输入 " + string{terminationChar} + " 终止输入."};
+    const string instructions{"输入1个double型数字或输入 " + string{terminationChar} + " 终止输入."};
+    constexpr double tolerance = 1.0 / 100;     // 误差精度
     cout << instructions << "\n";
+    double val{};
     char c{};
     while (cin.get(c) && c != terminationChar) {
-        cin.putback(c);
-        static int val1{};
-        static int val2{};
-        if (cin >> val1 >> val2) {
-            cout << "输入数字: " << val1 << " " << val2 << '\n';
+        cin.putback(c);     // 将c放回输入流
+        static double min{DBL_MAX};
+        static double max{DBL_MIN};
+
+        if (cin >> val) {
+            cout << val;
+            if (val < min) {
+                min = val;
+                cout << " the smallest so far \n";
+            }
+            if (val > max) {
+                max = val;
+                cout << " the largest soo far \n";
+            }
         } else {    // 如果输入的不是数字, 则用cin.clear()复原错误标志位，然后从缓存区获取输入的字符c
             cin.clear();
             cin.get(c);		// 从输入流中重新获取字符
@@ -34,7 +40,7 @@ int main() {
         }
         cout << instructions << '\n';
     }
-
+    
     keep_window_open();
     return 0;
 }
