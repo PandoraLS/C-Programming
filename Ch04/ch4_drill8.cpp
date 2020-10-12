@@ -1,9 +1,10 @@
 /*
  * @Author: seenli 
- * @Date: 2020-10-06 20:23:41 
+ * @Date: 2020-10-09 13:00:34 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-06 22:06:22
+ * @Last Modified time: 2020-10-09 20:31:51
  */
+
 
 #include <cfloat>
 #include "std_lib_facilities.h"
@@ -58,7 +59,7 @@ int main() {
         } else if (unitOfMeasure.find(terminationChar) != string::npos) {   // string::npos可以表示字符串结束的位置
             break;
         } else {
-            cout << "Entry was an invalid number or termination, please try again. \n";
+            cout << "Entry was an invalid unit of measure or termination, please try again. \n";
         }
         cout << instructions << '\n';
     }

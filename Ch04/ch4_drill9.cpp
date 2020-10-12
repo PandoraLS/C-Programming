@@ -1,30 +1,30 @@
 /*
  * @Author: seenli 
- * @Date: 2020-10-06 20:23:41 
+ * @Date: 2020-10-09 13:11:02 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-06 22:06:22
+ * @Last Modified time: 2020-10-09 16:19:43
  */
+
 
 #include <cfloat>
 #include "std_lib_facilities.h"
 
 int main() {
     constexpr char terminationChar = '|';       // 终止符
-    const string instructions{"输入1个double型数字或输入 " + string{terminationChar} + " 终止输入."};
+    const string instructions{"输入1个double型数字＋单位 或 输入 " + string{terminationChar} + " 终止输入."};
     // constexpr double tolerance = 1.0 / 100;     // 误差精度
     const unordered_map<string, double> convert {
-        {"m", 100.0},       // convert to cm
-        {"cm", 1.00},       // leave as is
-        {"in", 2.54},       // convert to cm
-        {"ft", 12.0 * 2.54} // convert to cm
+        {"m", 1.0},       // convert to cm
+        {"cm", 0.01},       // leave as is
+        {"in", 0.0254},       // convert to cm
+        {"ft", 12.0 * 0.0254} // convert to cm
     };
     
+    vector<double> enteredMeasurements;
     cout << instructions << "\n";
     char c{};
     while (cin.get(c) && c != terminationChar) {
         cin.putback(c);                 // 将c放回输入流
-        static double min{DBL_MAX};     // DBL_MAX 需要 #include <cfloat>
-        static double max{DBL_MIN};
 
         // get number
         static double enteredMeasurement{};
@@ -45,25 +45,25 @@ int main() {
         if (itr != convert.end()) {
             static double convertedMeasurement{};
             convertedMeasurement = enteredMeasurement * itr->second;
-            cout << enteredMeasurement << unitOfMeasure << " converted to " 
-            << convertedMeasurement << "cm\n";
-            if (min > convertedMeasurement) {
-                min = convertedMeasurement;
-                cout << convertedMeasurement << "cm is the smallest so far \n\n";
-            }
-            if (max < convertedMeasurement) {
-                max = convertedMeasurement;
-                cout << convertedMeasurement << "cm is the largest sof far \n\n";
-            }
+            enteredMeasurements.push_back(convertedMeasurement);
+            cout << enteredMeasurement << unitOfMeasure << " converted to " << convertedMeasurement << "m\n";
         } else if (unitOfMeasure.find(terminationChar) != string::npos) {   // string::npos可以表示字符串结束的位置
             break;
         } else {
-            cout << "Entry was an invalid number or termination, please try again. \n";
+            cout << "Entry was an invalid unit of measure or termination, please try again. \n";
         }
         cout << instructions << '\n';
     }
     cout << "termination '" << terminationChar << "' found \n";
-
+    
+    // 输出measurements
+    if (!enteredMeasurements.empty()) {
+        sort(enteredMeasurements.begin(), enteredMeasurements.end());
+        cout << "输入数据的数量：" << enteredMeasurements.size() << '\n';
+        cout << "输入数据最小值：" << enteredMeasurements.front() << "m\n";
+        cout << "输入数据最大值：" << enteredMeasurements.back() << "m\n";
+        cout << "有效输入求和：  " << accumulate(enteredMeasurements.cbegin(), enteredMeasurements.cend(), 0.0) << "m\n";
+    }
     keep_window_open();
     return 0;
 }
