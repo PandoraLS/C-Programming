@@ -2,7 +2,7 @@
  * @Author: seenli 
  * @Date: 2020-10-09 14:56:14 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-09 15:35:17
+ * @Last Modified time: 2020-10-13 16:54:28
  */
 
 /*
@@ -15,7 +15,7 @@ Hint: A median need not be an element of the sequence.
 #include "std_lib_facilities.h"
 
 int main() {
-    cout << "输入一组数据, 以 Ctrl + Z 结束 \n";
+    cout << "输入一组数据, 以 回车 + Ctrl + Z 结束 \n";
     vector<double> numbers;
     for (double num; cin >> num;)
         numbers.push_back(num);
@@ -29,3 +29,4 @@ int main() {
     keep_window_open();
     return 0;
 }
+
