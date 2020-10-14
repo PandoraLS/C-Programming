@@ -13,8 +13,8 @@ int main() {
     for (int num; cin >> num;)
         numbers.push_back(num);
     sort(numbers);
-    cout << "min: " << numbers[0] << endl;
-    cout << "max: " << numbers[numbers.size() - 1] << endl;
+    cout << "min: " << numbers.front() << endl;
+    cout << "max: " << numbers.back() << endl;
     vector<int> histogram(numbers.size(), 0);       // 大小为 numbers.size(), 均值为0
     vector<int>::iterator it = numbers.begin();     // iterator为指针
     while (it != numbers.end())

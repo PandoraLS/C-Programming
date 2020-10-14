@@ -24,14 +24,21 @@ int main() {
     }
 
     if (!sequence.empty()) {
-        sort(sequence.begin(), sequence.end());
-        vType::value_type mode{};           // 通过取消对迭代器的引用，可以获得值的类型
-        vType::difference_type count{};     // 标识迭代器之间的距离的一种类型
+        sort(sequence.begin(), sequence.end());     // 排序后的字符串
+        cout << "排序后的sequence: \n";
+        for (int i{};i < sequence.size(); i++){
+            cout << sequence.at(i) << " ";
+        }
+        cout << endl;
+        
+        vType::value_type mode{};           // value_type  通过取消对迭代器的引用，可以获得值的类型
+        vType::difference_type count{};     // difference_type  标识迭代器之间的距离的一种类型
 
         // 搜索重复最多的vector元素
         for (auto i{sequence.cbegin()}, next{sequence.cbegin()}; i != sequence.end(); i = next) {
             // 直到后面的与 *i不同
-            next = find_if_not(i, sequence.cend(), [i](vType::value_type comp){return *i == comp;});    
+            next = find_if_not(i, sequence.cend(), [i](vType::value_type comp){return *i == comp;});
+            // TODO 这是什么语法 [i](vType::value_type comp){return *i == comp;}
             
             auto temp_count{next - i};  // temp_count 为该字符串的重复次数
             if (temp_count >= count){
