@@ -8,6 +8,7 @@ vs code的C++配置过程详见[CSDN](https://blog.csdn.net/bat67/article/detail
 
 
 C-test/ 是实验各种各样的基于C/C++ demo的小程序
+C-posix/ 是为了使用多线程而使用的thread为posix的结构
 
 参考链接：
 [PPP](https://github.com/thelastpolaris/Programming-Principles-and-Practice-Using-C-)

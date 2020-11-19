@@ -16,7 +16,7 @@
             "preLaunchTask": "g++", // 调试会话开始前执行的任务，一般为编译程序，c++为g++, c为gcc  
             "setupCommands": [  
                 {   
-		            "description": "Enable pretty-printing for gdb",  
+		    "description": "Enable pretty-printing for gdb",  
                     "text": "-enable-pretty-printing",  
                     "ignoreFailures": true  
                 }  

@@ -1,0 +1,36 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "E:/Sofeware/MinGW/lib/gcc/mingw32/8.2.0/include/c++",
+                "E:/Sofeware/MinGW/lib/gcc/mingw32/8.2.0/include/c++/mingw32",
+                "E:/Sofeware/MinGW/lib/gcc/mingw32/8.2.0/include/c++/backward",
+                "E:/Sofeware/MinGW/lib/gcc/mingw32/8.2.0/include/",
+                "E:/Sofeware/MinGW/include",
+                "E:/Sofeware/MinGW/lib/gcc/mingw32/8.2.0/include-fixed"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "__GNUC__=6",
+                "_cdecl=__attribute__((__cdecl__))"
+            ],
+            "windowsSdkVersion": "8.1",
+            "compilerPath": "E:/Sofeware/MinGW/bin/g++.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64",
+            "browse": {
+                "path":[
+                    "E:/Sofeware/MinGW/lib/gcc/mingw32/8.2.0/include",
+                    "E:/Sofeware/MinGW/lib/gcc/mingw32/8.2.0/include-fixed",
+                    "E:/Sofeware/MinGW/include/*"
+                ]
+            }
+        }
+    ],
+    "version": 4
+}

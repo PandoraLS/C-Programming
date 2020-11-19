@@ -17,6 +17,7 @@
 #include <vector>
 #include <thread>
 #include <mutex>
+#include <stdlib.h>
 
 const int INF = (int)1e9;
 
@@ -64,5 +65,6 @@ int main() {
     diff = std::chrono::duration_cast<std::chrono::milliseconds>(tend - tstart).count();
     std::cout << "B: " << diff << std::endl;
 
+    system("pause");
     return 0;
 }

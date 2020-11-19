@@ -2,11 +2,13 @@
  * @Author: seenli 
  * @Date: 2020-11-17 17:07:20 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-11-17 21:24:17
+ * @Last Modified time: 2020-11-19 15:23:57
  */
 
+// TODO 后续计划实现带有[并行]操作的
 /**
  * @brief main application to test ping-pong-buffer
+ * 该代码是ping pong buffer的一个原理性实现，从流程上来看并没有[并行]的操作
  */
 
 #include <string.h>
@@ -14,8 +16,6 @@
 #include <stdlib.h>			//system("pause");的头文件
 #include "ping_pong_buffer.h"
 
-// /* creates a 32 byte ping-pong-buffer*/
-// PPBUF_DECLARE(test,32);
 /* creates a 4 byte ping-pong-buffer*/
 PPBUF_DECLARE(test,4);
 
