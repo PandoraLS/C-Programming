@@ -16,9 +16,10 @@
         "compilerPath": "C:/software/mingw-w64/i686-8.1.0-release-posix-dwarf-rt_v6-rev0/mingw32/bin/gcc.exe",
         "cStandard": "c11",
         "cppStandard": "c++17",
-        "intelliSenseMode": "clang-x64",
+        "intelliSenseMode": "gcc-x86",
         "browse": {
           "path": [
+            "${workspaceRoot}",
             "C:/software/mingw-w64/i686-8.1.0-release-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include",
             "C:/software/mingw-w64/i686-8.1.0-release-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed",
             "C:/software/mingw-w64/i686-8.1.0-release-posix-dwarf-rt_v6-rev0/mingw32/include/*"
