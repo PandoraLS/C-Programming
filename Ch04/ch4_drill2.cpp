@@ -2,7 +2,7 @@
  * @Author: seenli 
  * @Date: 2020-10-06 14:18:06 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-06 14:19:48
+ * @Last Modified time: 2020-11-23 19:14:25
  */
 
 
@@ -20,7 +20,7 @@ int main() {
         static int val2{};
         if (cin >> val1 >> val2) {
             if (val1 > val2) {
-                swap(val1, val2);
+                swap(val1, val2);       // #include <algorithm>
             }
             cout << "smaller value is " << val1 << " and the larger value is " << val2 << '\n';
         } else {    // 如果输入的不是数字, 则用cin.clear()复原错误标志位，然后从缓存区获取输入的字符c
@@ -33,7 +33,8 @@ int main() {
         }
         cout << instructions << '\n';
     }
-
+    
     keep_window_open();
     return 0;
 }
+

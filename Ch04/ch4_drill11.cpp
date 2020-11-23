@@ -2,7 +2,7 @@
  * @Author: seenli 
  * @Date: 2020-10-09 14:04:37 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-09 14:53:44
+ * @Last Modified time: 2020-11-23 21:53:22
  */
 
 /*
@@ -79,7 +79,7 @@ int main() {
             convertedMeasurement = enteredMeasurement * itr->second;
             enteredMeasurements.push_back(convertedMeasurement);
             cout << enteredMeasurement << unitOfMeasure << " converted to " << convertedMeasurement << "m\n";
-        } else if (unitOfMeasure.find(terminationChar) != string::npos) {   // string::npos可以表示字符串结束的位置
+        } else if (unitOfMeasure.find(terminationChar) != string::npos) {   // string::npos 表示 non-position
             break;
         } else {
             cout << "Entry was an invalid unit of measure or termination, please try again. \n";
@@ -88,7 +88,7 @@ int main() {
     }
     cout << "termination '" << terminationChar << "' found \n";
     
-    // 输出measurements
+    // 输出 measurements
     if (!enteredMeasurements.empty()) {
         sort(enteredMeasurements.begin(), enteredMeasurements.end());
         cout << "Values collected: \n";

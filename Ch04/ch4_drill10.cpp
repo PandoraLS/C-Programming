@@ -2,9 +2,8 @@
  * @Author: seenli 
  * @Date: 2020-10-09 13:58:00 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-09 14:03:19
+ * @Last Modified time: 2020-11-23 21:53:24
  */
-
 
 #include <cfloat>
 #include "std_lib_facilities.h"
@@ -47,7 +46,7 @@ int main() {
             convertedMeasurement = enteredMeasurement * itr->second;
             enteredMeasurements.push_back(convertedMeasurement);
             cout << enteredMeasurement << unitOfMeasure << " converted to " << convertedMeasurement << "m\n";
-        } else if (unitOfMeasure.find(terminationChar) != string::npos) {   // string::npos可以表示字符串结束的位置
+        } else if (unitOfMeasure.find(terminationChar) != string::npos) {   // string::npos 表示 non-position
             break;
         } else {
             cout << "Entry was an invalid unit of measure or termination, please try again. \n";

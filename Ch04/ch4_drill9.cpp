@@ -2,7 +2,7 @@
  * @Author: seenli 
  * @Date: 2020-10-09 13:11:02 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-09 16:19:43
+ * @Last Modified time: 2020-11-23 21:52:52
  */
 
 
@@ -12,7 +12,6 @@
 int main() {
     constexpr char terminationChar = '|';       // 终止符
     const string instructions{"输入1个double型数字＋单位 或 输入 " + string{terminationChar} + " 终止输入."};
-    // constexpr double tolerance = 1.0 / 100;     // 误差精度
     const unordered_map<string, double> convert {
         {"m", 1.0},       // convert to cm
         {"cm", 0.01},       // leave as is
@@ -47,7 +46,7 @@ int main() {
             convertedMeasurement = enteredMeasurement * itr->second;
             enteredMeasurements.push_back(convertedMeasurement);
             cout << enteredMeasurement << unitOfMeasure << " converted to " << convertedMeasurement << "m\n";
-        } else if (unitOfMeasure.find(terminationChar) != string::npos) {   // string::npos可以表示字符串结束的位置
+        } else if (unitOfMeasure.find(terminationChar) != string::npos) {   // string::npos 表示 non-position
             break;
         } else {
             cout << "Entry was an invalid unit of measure or termination, please try again. \n";

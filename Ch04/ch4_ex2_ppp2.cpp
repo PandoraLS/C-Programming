@@ -2,13 +2,13 @@
  * @Author: seenli 
  * @Date: 2020-10-09 15:10:07 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-09 15:58:51
+ * @Last Modified time: 2020-11-23 21:51:23
  */
 
 /*
 Section 4 exercise 2.
 If we define the median of a sequence as "a number so that exactly as many elements come before
-it in the sequence as come after it," fix the program in ??4.6.3 so that it always prints out a median.
+it in the sequence as come after it," fix the program in 4.6.3 so that it always prints out a median.
 Hint: A median need not be an element of the sequence.
 参考链接：[PPP2](https://github.com/Jtaim/Programming-Principles-and-Practice-Using-Cpp)
 */
@@ -30,10 +30,10 @@ int main() {
         if (cin.eof() || cin.bad()) {
             break;
         }
-        cin.clear();
+        cin.clear();        // 将错误标志位修改为0
         static string str;
         cin >> str;
-        if (str.find(termination) != string::npos) {
+        if (str.find(termination) != string::npos) { // 表示find到[终止符]
             break;
         }
     }

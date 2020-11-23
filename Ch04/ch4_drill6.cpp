@@ -2,7 +2,7 @@
  * @Author: seenli 
  * @Date: 2020-10-06 14:51:56 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-06 21:26:44
+ * @Last Modified time: 2020-11-23 19:39:48
  */
 
 #include <cfloat>
@@ -16,7 +16,7 @@ int main() {
     double val{};
     char c{};
     while (cin.get(c) && c != terminationChar) {
-        cin.putback(c);     // 将c放回输入流
+        cin.putback(c);     // 将字符c放回输入流
         static double min{DBL_MAX};
         static double max{DBL_MIN};
 

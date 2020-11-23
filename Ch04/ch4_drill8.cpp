@@ -2,7 +2,7 @@
  * @Author: seenli 
  * @Date: 2020-10-09 13:00:34 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-09 20:31:51
+ * @Last Modified time: 2020-11-23 21:52:32
  */
 
 
@@ -12,7 +12,6 @@
 int main() {
     constexpr char terminationChar = '|';       // 终止符
     const string instructions{"输入1个double型数字或输入 " + string{terminationChar} + " 终止输入."};
-    // constexpr double tolerance = 1.0 / 100;     // 误差精度
     const unordered_map<string, double> convert {
         {"m", 100.0},       // convert to cm
         {"cm", 1.00},       // leave as is
@@ -56,7 +55,7 @@ int main() {
                 max = convertedMeasurement;
                 cout << convertedMeasurement << "cm is the largest sof far \n\n";
             }
-        } else if (unitOfMeasure.find(terminationChar) != string::npos) {   // string::npos可以表示字符串结束的位置
+        } else if (unitOfMeasure.find(terminationChar) != string::npos) {   // string::npos 表示 non-position
             break;
         } else {
             cout << "Entry was an invalid unit of measure or termination, please try again. \n";
