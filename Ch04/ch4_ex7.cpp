@@ -2,7 +2,7 @@
  * @Author: seenli 
  * @Date: 2020-10-10 12:48:40 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-10 17:03:07
+ * @Last Modified time: 2020-12-01 15:45:24
  */
 
 
@@ -17,7 +17,7 @@ or spelled out.
 double add(double arg1, double arg2) {
     return arg1 + arg2;
 }
- 
+
 double subtract (double arg1, double arg2) {
     return arg1 - arg2;
 }
@@ -40,7 +40,7 @@ bool getNumber(double& arg, const vector<string>& spelledNumbers) {
     }
 
     // 检查number是否为拼写
-    cin.clear();
+    cin.clear();        // 清除错误标志位
     string spelledNumber;
     cin >> spelledNumber;
 
@@ -59,9 +59,9 @@ bool getNumber(double& arg, const vector<string>& spelledNumbers) {
     return true;
 }
 
-using math = double(*) (double, double);
+using opt = double(*) (double, double);
 
-unordered_map<char, math> calculate {
+unordered_map<char, opt> calculate {
     {'+', add},
     {'-', subtract},
     {'*', multiply},

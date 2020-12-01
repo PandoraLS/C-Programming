@@ -2,7 +2,7 @@
  * @Author: seenli 
  * @Date: 2020-10-13 00:41:57 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-13 01:14:15
+ * @Last Modified time: 2020-12-01 19:34:15
  */
 
 /*
@@ -10,7 +10,7 @@ Section 4 exercise 13.
  Create a program to find all the prime numbers between 1 and 100.
  There is a classic method for doing this, called the “Sieve of Eratosthenes.”
  If you don’t know that method, get on the web and look it up. Write your program using this method.
- https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+ https://zh.wikipedia.org/wiki/埃拉托斯特尼筛法
  https://www.geeksforgeeks.org/sieve-of-eratosthenes/
 */
 
@@ -27,6 +27,7 @@ void SieveOfEratosthenes(int n) {
         // 如果 prime[p]未改变(仍是true), then it is a prime
         if (prime[p] == true) {
             // 将所有大于p的倍数或者等于 p^2 的数都标记为false
+            // 最先被标记的合数确实是 p*p (具体参考wiki百科的动图)
             for (int i = p * p; i <= n; i += p) 
                 prime[i] = false;
         }

@@ -1,8 +1,8 @@
 /*
  * @Author: seenli 
- * @Date: 2020-10-09 19:42:18 
- * @Last Modified by: seenli
- * @Last Modified time: 2020-10-09 20:28:43
+ * @Date: 2020-12-01 13:24:53 
+ * @Last Modified by:   seenli 
+ * @Last Modified time: 2020-12-01 13:24:53 
  */
 
 /*
@@ -19,7 +19,7 @@
 double add(double arg1, double arg2) {
     return arg1 + arg2;
 }
- 
+
 double subtract (double arg1, double arg2) {
     return arg1 - arg2;
 }
@@ -35,9 +35,9 @@ double divide (double arg1, double arg2) {
     return arg1 / arg2;
 }
 
-using math = double(*) (double, double);        // 
+using opt = double(*) (double, double);        // 
 
-unordered_map<char, math> calculate {
+unordered_map<char, opt> calculate {
     {'+', add}, 
     {'-', subtract},
     {'*', multiply},
@@ -56,7 +56,10 @@ int main() {
     if (itr == calculate.end()) {
         simple_error("输入错误\n");
     }
-    cout << arg1 << " " << op << " " << arg2 << " = " << itr->second(arg1, arg2) << endl;
+    // cout << arg1 << " " << op << " " << arg2 << " = " << itr->second(arg1, arg2) << endl;
+    cout << arg1 << " " << itr->first << " " << arg2 << " = " << itr->second(arg1, arg2) << endl;
+    // itr->first对应的就是操作符，itr->second对应的就是具体操作函数
+
     keep_window_open();
     return 0;
 }

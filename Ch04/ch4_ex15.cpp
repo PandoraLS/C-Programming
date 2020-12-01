@@ -2,7 +2,7 @@
  * @Author: seenli 
  * @Date: 2020-10-13 14:17:03 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-13 16:09:12
+ * @Last Modified time: 2020-12-01 19:49:42
  */
 
 /*
@@ -15,7 +15,7 @@
 int main() {
     vector<int> primes{2};
     int count{1};       // 计数质数的个数, 2已经被记录
-    int i{3};           // i用来后续索引每个数
+    int i{3};           // i用于索引每个数
     int n{};            // 程序最终会输出n个数
     cout << "请输出一个数字n, 程序会输出n个素数：\n";
     if (!(cin >> n)) {

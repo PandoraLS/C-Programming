@@ -2,7 +2,7 @@
  * @Author: seenli 
  * @Date: 2020-10-09 20:22:11 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-10 13:49:59
+ * @Last Modified time: 2020-12-01 15:31:25
  */
 
 /*
@@ -26,14 +26,13 @@ int main() {
         } else {
             cout << "输入的数字无法被拼写 \n";
         }
-    } else {    
-        // 检查是否是拼写出来的  
-        cin.clear();
+    } else {    // 说明输入的不是数字
+        cin.clear();    // 清除错误标志位
         string spelledNumber;
         cin >> spelledNumber;
 
         // convert to lower  
-        transform(spelledNumber.begin(), spelledNumber.end(), spelledNumber.begin(), [](char c){
+        transform(spelledNumber.begin(), spelledNumber.end(), spelledNumber.begin(), [](char c) {
             return static_cast<unsigned char>(tolower(c));
         });
 
@@ -48,5 +47,3 @@ int main() {
     keep_window_open();
     return 0;
 }
-
-

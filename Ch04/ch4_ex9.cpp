@@ -2,7 +2,7 @@
  * @Author: seenli 
  * @Date: 2020-10-12 18:13:50 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-12 18:15:52
+ * @Last Modified time: 2020-12-01 16:18:31
  */
 
 /*
@@ -28,7 +28,7 @@ int main() {
 
     constexpr int maxSquares = 64;
     unsigned long long current_square_grains{1};        // 目前谷物的平方
-    decltype(current_square_grains) previous_square_grains{0}; // 之前谷物的平方  
+    decltype(current_square_grains) previous_square_grains{0}; // 之前谷物的平方
     cout << "size of square = " << sizeof(current_square_grains) << endl;
     cout << "max limit of square = " << numeric_limits<decltype(current_square_grains)>::max() << "\n\n";
 
@@ -43,17 +43,17 @@ int main() {
         sum += current_square_grains;
         // cout << "squares to this point is " << sum << " grains. \n";
 
-        if(current_square_grains <= 1000 && sum >= 1000){
+        if(current_square_grains <= 1000 && sum >= 1000) {
 			std::cout << square << " provides approximately 1000 grains.\n\n";
-		} else if(current_square_grains <= 1000000 && sum >= 1000000){
+		} else if(current_square_grains <= 1000000 && sum >= 1000000) {
 			std::cout << square << " provides approximately 1,000,000 grains.\n\n";
-		} else if(current_square_grains <= 1000000000 && sum >= 1000000000){
+		} else if(current_square_grains <= 1000000000 && sum >= 1000000000) {
 			std::cout << square << " provides approximately 1,000,000,000 grains.\n\n";
-		} else if(current_square_grains <= 1000000000000 && sum >= 1000000000000){
+		} else if(current_square_grains <= 1000000000000 && sum >= 1000000000000) {
 			std::cout << square << " provides approximately 1,000,000,000,000 grains.\n\n";
-		} else if(current_square_grains <= 1000000000000000 && sum >= 1000000000000000){
+		} else if(current_square_grains <= 1000000000000000 && sum >= 1000000000000000) {
 			std::cout << square << " provides approximately 1,000,000,000,000,000 grains.\n\n";
-		} else if(current_square_grains <= 1000000000000000000 && sum >= 1000000000000000000){
+		} else if(current_square_grains <= 1000000000000000000 && sum >= 1000000000000000000) {
 			std::cout << square << " provides approximately 1,000,000,000,000,000,000 grains.\n\n";
 		}
     }

@@ -19,7 +19,7 @@
 int main() {
     constexpr char termination = '|';
     vector<double> distances;
-    cout << "输入一些 距离 数据, 确定中值, 平均数, 最大最小值. " << termination << " to exit\n";
+    cout << "输入一些 距离 数据, 确定中值, 平均数, 最大最小值. " << termination << " to exit \n";
 
     for (char c{}; cin.get(c) && c != termination; c = '\0') {
         cin.putback(c);

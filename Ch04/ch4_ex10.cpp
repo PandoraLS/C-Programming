@@ -2,7 +2,7 @@
  * @Author: seenli 
  * @Date: 2020-10-12 18:16:26 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-12 19:52:24
+ * @Last Modified time: 2020-12-01 16:39:12
  */
 
 /*
@@ -22,7 +22,7 @@ Section 4 exercise 10.
 int main() {
     random_device rd;                               // 用于获取随机数的种子
     mt19937 gen(rd());                              // 梅森旋转算法确定伪随机数
-    uniform_int_distribution<> dis(0, 2);           // 离散均匀分布, 范围0~2
+    uniform_int_distribution<> dis(0, 2);           // 离散均匀分布, 范围{0,1,2}
 
     vector<string> rps{"ROCK", "PAPER", "SCISSORS"};
     
@@ -30,11 +30,11 @@ int main() {
     do {
         cout << "选择  (0) for Rock, (1) for Paper, (2) for Scissors\n";
         // 检查输入是否合适
-        int pSelect {};
+        int pSelect {};     // person select
         if (!(cin >> pSelect) || pSelect > 2) {
             simple_error("selected r/p/s poorly");
         }
-        auto cSelect{dis(gen)};     // 只有3中选择 在0、1、2中随机选择
+        auto cSelect{dis(gen)};     // 只有3种选择 在0、1、2中随机选择, computer select
         cout << "Your selection was " << rps.at(pSelect) << ", the computer selected " << rps.at(cSelect) << endl;
         cout << "\nWould you like to play again (y or n)" << endl;
         char c;
