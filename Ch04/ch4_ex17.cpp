@@ -2,7 +2,7 @@
  * @Author: seenli 
  * @Date: 2020-10-14 00:38:59 
  * @Last Modified by: seenli
- * @Last Modified time: 2020-10-14 01:55:44
+ * @Last Modified time: 2020-12-02 14:19:37
  */
 
 /*
@@ -14,7 +14,7 @@ finds the min, max and mode of a sequence of strings
 
 int main() {
     using vType = vector<string>;
-    cout << "输入一系列strings 的max、min、mode. 以 回车 + Ctrl-Z 结束输入序列 \n";
+    cout << "输入一系列strings, 输出max、min、mode. 以 回车 + Ctrl-Z 结束输入序列 \n";
 
     vType sequence;     //存储输入的序列 
     for(vType::value_type enteredValue{}; cin >> enteredValue; ) {
@@ -30,16 +30,14 @@ int main() {
             cout << sequence.at(i) << " ";
         }
         cout << endl;
-        
-        vType::value_type mode{};           // value_type  通过取消对迭代器的引用，可以获得值的类型
-        vType::difference_type count{};     // difference_type  标识迭代器之间的距离的一种类型
+
+        vType::value_type mode{};           // value_type  获得值的类型
+        vType::difference_type count{};     // difference_type  表示迭代器之间的距离的一种类型
 
         // 搜索重复最多的vector元素
-        for (auto i{sequence.cbegin()}, next{sequence.cbegin()}; i != sequence.end(); i = next) {
+        for (auto i{sequence.cbegin()}, next{sequence.cbegin()}; i != sequence.cend(); i = next) {
             // 直到后面的与 *i不同
             next = find_if_not(i, sequence.cend(), [i](vType::value_type comp){return *i == comp;});
-            // TODO 这是什么语法 [i](vType::value_type comp){return *i == comp;}
-            
             auto temp_count{next - i};  // temp_count 为该字符串的重复次数
             if (temp_count >= count){
                 count = temp_count;
