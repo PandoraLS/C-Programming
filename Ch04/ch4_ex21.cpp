@@ -22,7 +22,7 @@ int main() {
     double score{};
     if (cin >> score) {
         // 查找到所有have that score的
-        vector<vector<pType>::iterator> itrs;
+        vector<vector<pType>::iterator> itrs;       // TODO 这是什么用法？
         for (auto itr = ranks.begin();  itr < ranks.end(); itr++) {
             if (itr->second == score) {
                 itrs.push_back(itr);
