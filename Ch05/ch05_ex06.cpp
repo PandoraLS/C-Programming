@@ -9,6 +9,8 @@
 sect 5 exercise 6
 Celsius to Fahrenheit converter
 Fahrenheit to Celsius converter
+f = c * ( 9.0 / 5.0) + 32.0
+c = (f - 32.0) / (9.0 / 5.0)
 */
 
 #include "std_lib_facilities.h"
