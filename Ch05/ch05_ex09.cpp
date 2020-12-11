@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2020-12-10 12:24:23
  * @LastEditors: seenli
- * @LastEditTime: 2020-12-10 13:57:01
+ * @LastEditTime: 2020-12-11 21:53:49
  * @FilePath: \Ch05\ch05_ex09.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -46,11 +46,11 @@ try{
         } else if (cin.fail()) {
             cin.clear();        // 清除错误标志位
 
-            // 检输入number是否overflowed(大于最大值, 小于最小值)
-            if (number > numeric_limits<vType::value_type>::max() ||
-                number < numeric_limits<vType::value_type>::min()) {
-                    error("Entered number overflowed number type!");
-                }
+            // 检查输入的数字是否overflowed
+            if (((number > 0) && (number > numeric_limits<vType::value_type>::max())) ||
+                ((number < 0) && (-1.0 * number > numeric_limits<vType::value_type>::max()))) {
+                error("Entered number overflowed number type!");
+            }
             
             // 是否终止
             char c;
@@ -90,6 +90,7 @@ try{
     keep_window_open();
     return 0;
 }
+
 catch (exception& e) {
     cerr << "error: " << e.what() << endl;
     keep_window_open();
@@ -110,9 +111,11 @@ catch (...) {
  * @error: element overflow
  */
 vType::value_type add(vType::value_type n1, vType::value_type n2) {
+    vType::value_type sum{};
     if (((n2 > 0) && (n1 > (numeric_limits<vType::value_type>::max() - n2))) ||
         ((n2 < 0) && (n1 < (numeric_limits<vType::value_type>::min() - n2)))) {
             error("overflow error");
-        }
+    }
     return n1 + n2;
 }
+
