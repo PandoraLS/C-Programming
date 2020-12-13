@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2020-12-10 12:24:23
  * @LastEditors: seenli
- * @LastEditTime: 2020-12-11 21:53:49
+ * @LastEditTime: 2020-12-13 14:57:57
  * @FilePath: \Ch05\ch05_ex09.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -22,7 +22,7 @@ Added overflow error when summing
 #include "std_lib_facilities.h"
 
 using vType = vector<int>;
-vType::value_type add(vType::value_type n1, vType::value_type n2);
+vType::value_type add(vType::value_type si_a, vType::value_type si_b);
 
 int main()
 try{
@@ -104,18 +104,22 @@ catch (...) {
 }
 
 
+// 四则运算的越界判断(有符号整型)
+// https://wiki.sei.cmu.edu/confluence/display/c/INT32-C.+Ensure+that+operations+on+signed+integers+do+not+result+in+overflow
 /**
  * @description: add function
  * @param {two number} 
  * @return {sum of two number}
  * @error: element overflow
  */
-vType::value_type add(vType::value_type n1, vType::value_type n2) {
+vType::value_type add(vType::value_type si_a, vType::value_type si_b) {
     vType::value_type sum{};
-    if (((n2 > 0) && (n1 > (numeric_limits<vType::value_type>::max() - n2))) ||
-        ((n2 < 0) && (n1 < (numeric_limits<vType::value_type>::min() - n2)))) {
+    if (((si_b > 0) && (si_a > (numeric_limits<vType::value_type>::max() - si_b))) ||
+        ((si_b < 0) && (si_a < (numeric_limits<vType::value_type>::min() - si_b)))) {
             error("overflow error");
+    } else {
+        sum = si_a + si_b;
     }
-    return n1 + n2;
+    return sum;
 }
 

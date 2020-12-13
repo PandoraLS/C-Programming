@@ -85,7 +85,8 @@
     //函数注释
     "fileheader.cursorMode": {
         "description": "",
-        "param": "",
-        "return": ""
+        "input": "",
+        "output": "",
+        "error":""
     }
 }

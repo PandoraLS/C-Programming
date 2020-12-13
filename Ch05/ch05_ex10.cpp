@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2020-12-11 13:34:40
  * @LastEditors: seenli
- * @LastEditTime: 2020-12-11 21:53:12
+ * @LastEditTime: 2020-12-13 15:28:28
  * @FilePath: \Ch05\ch05_ex10.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -16,9 +16,6 @@ From that vector calculate the sum of those N doubles.
 Also  provide a vector of the delta between delta[1] - delta[0], ..., delta[N] - delta[N-1].
 Instruct user to terminate series with '|' when finished entering numbers.
 Handle all inputs and provide and error N is larger than input vector
-
-四则运算的越界判断
-https://wiki.sei.cmu.edu/confluence/display/c/INT32-C.+Ensure+that+operations+on+signed+integers+do+not+result+in+overflow
 */
 
 #include "std_lib_facilities.h"
@@ -111,6 +108,8 @@ catch (...) {
 }
 
 
+//TODO double的overflow条件与INT不一样(double的max()和min()均是正数)
+// 所以这里没有进一步处理
 /**
  * @description: addition function.
  * @param {two numbers}
@@ -118,14 +117,7 @@ catch (...) {
  * @error: element overflow
  */
 vType::value_type add(vType::value_type si_a, vType::value_type si_b) {
-    vType::value_type sum{};
-    if (((si_b > 0) && (si_a > numeric_limits<vType::value_type>::max() - si_b)) ||
-        ((si_b < 0) && (si_a < numeric_limits<vType::value_type>::min() - si_b))) {
-        error("overflow error");        
-    } else {
-        sum = si_a + si_b;
-    }
-    return sum;
+    return si_a + si_b;
 }
 
 
@@ -136,13 +128,5 @@ vType::value_type add(vType::value_type si_a, vType::value_type si_b) {
  * @error: element overflow
  */
 vType::value_type subtract(vType::value_type si_a, vType::value_type si_b) {
-    vType::value_type diff{};
-    if (((si_b > 0) && (si_a < numeric_limits<vType::value_type>::min() + si_b)) ||
-        ((si_b < 0) && (si_a > numeric_limits<vType::value_type>::max() + si_b))) {
-        error("overflow error");
-    } else {
-        diff = si_a - si_b;
-    }
-    return diff;
+    return si_a - si_b;
 }
-
