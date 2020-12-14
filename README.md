@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-09-20 16:10:02
+ * @LastEditTime: 2020-12-14 16:10:47
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \undefinedc:\Education\code\C-Programming\README.md
+-->
 # C-Programming
 Principles and Practice Using C++ (Second Edition)
 
@@ -13,4 +21,5 @@ C-posix/ 是为了使用多线程而使用的thread为posix的结构
 参考链接：
 [PPP](https://github.com/thelastpolaris/Programming-Principles-and-Practice-Using-C-)
 [PPP2](https://github.com/Jtaim/Programming-Principles-and-Practice-Using-Cpp)
+[PPP3](https://github.com/bewuethr/stroustrup-ppp)
 
