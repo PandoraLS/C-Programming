@@ -1,16 +1,11 @@
 /*
  * @Author: seenli
- * @Date: 2020-12-15 21:07:44
+ * @Date: 2020-12-20 15:31:45
  * @LastEditors: seenli
- * @LastEditTime: 2020-12-20 16:07:40
- * @FilePath: \Ch06\ch06_ex02.cpp
+ * @LastEditTime: 2020-12-20 16:24:33
+ * @FilePath: \Ch06\ch06_ex03.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
-
-/**
-Section 6 exercise 2
-Add the ability to use {}
-*/
 
 /*
     Expression:
@@ -26,6 +21,7 @@ Add the ability to use {}
         Number
         "(" Expression ")"
         "{" Expression "}"
+        Primary "!"
     Number:
         floating-point-literal
 */
@@ -75,7 +71,7 @@ Token Token_stream::get() {
         {
         case ';':                                       // 输出
         case 'q':                                       // quit
-        case '{': case '}':
+        case '!': case '{': case '}':
         case '(': case ')': case '+': case '-': case '*': case '/':
             temp.kind = ch;
             break;
@@ -133,6 +129,9 @@ double primary() {
     case '+':
         temp = primary();                               // 处理 + 一元运算符
         break;
+    case '!':
+        cin.putback('!');                               // 如果阶乘前面没有primary
+        temp = 0;                                       // 添加 1 返回到输入流中， 0或1的阶乘为1
     case '8':                                           // 使用 '8' 来代替number
         temp = t.value;                                 // 返回num的数值
         break;
@@ -142,20 +141,45 @@ double primary() {
     return temp;
 }
 
+// 阶乘优先级更高
+double factorial() {
+    double left = primary();
+    Token t = ts.get();
+    if (t.kind == '!') {
+        cout << "warning 整型将把浮点数截断为整型" << endl;
+        auto fact = narrow_cast<long long, double>(left);
+        if (fact < 0) {
+            error("阶乘不可以为负数");
+        } else if (fact == 0) {
+            left = 1.0;
+        } else {
+            decltype(fact) temp = 1;
+            for (long long i = 1; i <= fact; ++i) {
+                temp *= i;
+                // 不做溢出检查
+            }
+            left = narrow_cast<double, long long>(temp);
+        }
+    } else {
+        ts.putback(t);
+    }
+    return left;
+}
+
 // 处理 * 和 /, 尚未实现 % 
 double term() {
-    double left = primary();
+    double left = factorial();
     Token t = ts.get();                                 // 从token流中获取下一个token
     while (true) {
         switch (t.kind)
         {
         case '*':
-            left *= primary();
+            left *= factorial();
             t = ts.get();
             break;
         case '/':
             {
-                double d = primary();
+                double d = factorial();
                 if (d == 0) error("divide by zero");
                 left /= d;
                 t = ts.get();
@@ -195,7 +219,7 @@ int main()
 try {
     cout << "\nWelcome to our simple calculator.\n"
         << "Please enter expressions using floating-point numbers.\n"
-        << "Operations available are +, -, * and /.\n"
+        << "Operations available are +, -, *, / and !.\n"
         << "Can change order of operations using ( ) and or { }.\n"
         << "Use the ; to show results and q to exit.\n\n";
 

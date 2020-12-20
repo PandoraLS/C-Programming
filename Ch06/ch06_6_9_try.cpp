@@ -2,10 +2,27 @@
  * @Author: seenli
  * @Date: 2020-12-14 20:23:29
  * @LastEditors: seenli
- * @LastEditTime: 2020-12-15 13:24:44
+ * @LastEditTime: 2020-12-20 16:06:53
  * @FilePath: \Ch06\ch06_6_9_try.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
+
+/*
+    Expression:
+        Term
+        Expression "+" Term
+        Expression "-" Term
+    Term:
+        Primary
+        Term "*" Primary
+        Term "/" Primary
+        Term "%" Primary
+    Primary:
+        Number
+        "(" Expression ")"
+    Number:
+        floating-point-literal
+*/
 
 #include "std_lib_facilities.h"
 
