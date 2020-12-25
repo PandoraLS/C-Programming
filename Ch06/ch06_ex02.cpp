@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2020-12-15 21:07:44
  * @LastEditors: seenli
- * @LastEditTime: 2020-12-20 16:07:40
+ * @LastEditTime: 2020-12-25 21:59:57
  * @FilePath: \Ch06\ch06_ex02.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
