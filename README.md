@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-09-20 16:10:02
- * @LastEditTime: 2020-12-14 16:10:47
+ * @LastEditTime: 2020-12-25 21:45:14
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \undefinedc:\Education\code\C-Programming\README.md
@@ -17,6 +17,8 @@ vs code的C++配置过程详见[CSDN](https://blog.csdn.net/bat67/article/detail
 del_exe.bat 是删除C-Programming/文件夹及子文件夹下所有*.exe文件
 C-test/ 是实验各种各样的基于C/C++ demo的小程序
 C-posix/ 是为了使用多线程而使用的thread为posix的结构
+
+vscode_env/ 实际上是`.vscode/`环境，由于每个电脑上的c++编译路径不同，所以`.vscode/`添加到了`.gitignore`中
 
 参考链接：
 [PPP](https://github.com/thelastpolaris/Programming-Principles-and-Practice-Using-C-)
