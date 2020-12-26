@@ -1,8 +1,8 @@
 /*
  * @Author: seenli
  * @Date: 2020-12-20 19:54:44
- * @LastEditors: seenli
- * @LastEditTime: 2020-12-20 21:13:18
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-26 16:33:05
  * @FilePath: \Ch06\ch06_ex06.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */

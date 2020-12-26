@@ -55,4 +55,4 @@ dkms.conf
 PPP/
 PPP2/
 PPP3/
-*.vscode/
+*/.vscode/
