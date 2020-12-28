@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2020-12-26 16:55:04
  * @LastEditors: seenli
- * @LastEditTime: 2020-12-26 19:02:32
+ * @LastEditTime: 2020-12-28 12:37:41
  * @FilePath: \Ch06\ch06_ex08.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -104,7 +104,9 @@ int get_bulls(const vType& guesses, vType& setSequence)
 	for(auto i{guesses.cbegin()}; i < guesses.cend(); ++i, ++j){
 		if(*i == *j){
 			++bulls;
-			*j = foundMark;     // foundMark标记走过的部分，且符合条件的部分
+			*j = foundMark;     // foundMark标记走过的部分，且符合bulls条件的部分
+            // 执行完这一步之后，符合bulls条件的部分已经被标记为foundMark，后续cows条件应该是剔除掉bulls之后再进行统计
+            // 所以需要foundMark将bulls的先标记了
 		}
 	}
 	return bulls;
