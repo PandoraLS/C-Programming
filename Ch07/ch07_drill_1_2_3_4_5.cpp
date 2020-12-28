@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2020-12-28 15:25:08
  * @LastEditors: seenli
- * @LastEditTime: 2020-12-28 17:00:26
+ * @LastEditTime: 2020-12-28 17:25:18
  * @FilePath: \Ch07\ch07_drill_1_2_3_4_5.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -193,7 +193,7 @@ void Token_stream::ignore(const char c) {
     } else {
         full = false;
         cin.clear();
-        cin.ignore(cin.rdbuf()->in_avail(), c);
+        cin.ignore(cin.rdbuf()->in_avail(), c);             // 把输入流的剩余部分全部忽略掉,如果遇到c将提前终止
     }
 }
 
