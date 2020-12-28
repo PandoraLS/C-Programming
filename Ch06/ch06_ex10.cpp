@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2020-12-28 13:41:30
  * @LastEditors: seenli
- * @LastEditTime: 2020-12-28 14:57:49
+ * @LastEditTime: 2020-12-28 15:00:14
  * @FilePath: \Ch06\ch06_ex10.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -102,3 +102,4 @@ catch (...) {
     keep_window_open();
     return 2;
 }
+
