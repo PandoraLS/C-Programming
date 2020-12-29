@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2020-12-28 15:25:08
  * @LastEditors: seenli
- * @LastEditTime: 2020-12-28 17:25:18
+ * @LastEditTime: 2020-12-29 21:49:40
  * @FilePath: \Ch07\ch07_drill_1_2_3_4_5.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -197,9 +197,142 @@ void Token_stream::ignore(const char c) {
     }
 }
 
+Token_stream ts;
+
+double expression();
+
+double primary() {
+    Token t = ts.get();
+    double d{};
+    switch(t.kind) {
+        case '(':
+            {
+                d = expression();
+                t = ts.get();
+                if (t.kind != ')') {
+                    error("')' expected");
+                }
+                return d;
+            }
+        case '-':
+            return -1 * primary();
+        case '+':
+            return primary();
+        case number:
+            return t.value;
+        case name:
+            return get_value(t.name);
+        default:
+            error("primary expected");
+    }
+}
+
+
+double term() {
+    double left = primary();
+    while (true) {
+        Token t = ts.get();
+        switch(t.kind) {
+            case '*':
+                left *= primary();
+                break;
+            case '/':
+                {
+                    double d = primary();
+                    if (d == 0) {
+                        error("divide by zero");
+                    }
+                    left /= d;
+                    break;
+                }
+            default:
+                ts.putback(t);
+                return left;
+
+        }
+    }
+}
+
+double expression() {
+    double left = term();
+    while (true) {
+        Token t = ts.get();
+        switch(t.kind) {
+            case '+':
+                left += term();
+                break;
+            case '-':
+                left -= term();
+                break;
+            default:
+                ts.putback(t);
+                return left;
+        }
+    }
+}
+
+/**
+ * @description: 声明定义变量
+ */
+double declaration() {
+    Token t = ts.get();
+    if (t.kind != name) {
+        error("name expected in declaration");
+    }
+    if (is_declared(t.name)) {
+        error(t.name, " declared twice");
+    }
+
+    Token t2 = ts.get();
+    if (t2.kind != '=') {
+        error("= missing in declaration of ", t.name);
+    }
+    double d = expression();
+    define_name(t.name, d);
+    return d;
+}
+
+double statement() {
+    Token t = ts.get();
+    switch(t.kind) {
+        case let:
+            return declaration();
+        default:
+            ts.putback(t);
+            return expression();
+    }
+}
+
+void clean_up_mess() {
+    ts.ignore(print);
+}
+
+void calculate() {
+    constexpr char* prompt = "> ";          // 提示符
+    constexpr char* result = "= ";          // 结果
+    while (true) try {
+        cout << prompt;
+        Token t = ts.get();
+        while (t.kind == print) {
+            t = ts.get();
+        }
+        if (t.kind == quit) {
+            return ;
+        }
+        ts.putback(t);
+        cout << result << statement() << endl;
+    }
+    catch (runtime_error& e) {
+        cerr << "error: " << e.what() << endl;
+        clean_up_mess();
+    }
+}
+
+
 int main()
 try {
-    
+    cin.sync_with_stdio(false);
+    calculate();
     keep_window_open();
     return 0;
 }
