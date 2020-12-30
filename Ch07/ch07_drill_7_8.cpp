@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2020-12-30 21:24:07
  * @LastEditors: seenli
- * @LastEditTime: 2020-12-30 22:11:42
+ * @LastEditTime: 2020-12-30 23:32:44
  * @FilePath: \Ch07\ch07_drill_7_8.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -17,7 +17,7 @@
 #include "std_lib_facilities.h"
 
 /**
- * @description: å­˜æ”¾æ•°å­—å’Œæ“ä½œç¬¦ç­‰
+ * @description: ´æ·ÅÊı×ÖºÍ²Ù×÷·ûµÈ
  */
 struct Token {
     char kind;
@@ -28,7 +28,7 @@ struct Token {
 };
 
 /**
- * @description: ç”¨æ¥å­˜å‚¨å˜é‡
+ * @description: ÓÃÀ´´æ´¢±äÁ¿
  */
 struct Variable {
     string name;
@@ -36,15 +36,15 @@ struct Variable {
 };
 
 /**
- * @description: é‡è½½ç­‰äºæ“ä½œ, ç®€åŒ– get, set, is_declaredå‡½æ•°
+ * @description: ÖØÔØµÈÓÚ²Ù×÷, ¼ò»¯ get, set, is_declaredº¯Êı
  */
 bool operator==(const Variable& v, const string s) {return v.name == s;}
 
-// å­˜å‚¨æ‰€æœ‰çš„variables
+// ´æ´¢ËùÓĞµÄvariables
 vector<Variable> names;
 
 /**
- * @description: æ ¹æ®è¾“å…¥çš„sè¿”å›å¯¹åº”çš„value
+ * @description: ¸ù¾İÊäÈëµÄs·µ»Ø¶ÔÓ¦µÄvalue
  * @param {conststring} s
  */
 double get_value(const string s) {
@@ -56,7 +56,7 @@ double get_value(const string s) {
 }
 
 /**
- * @description: æŸ¥æ‰¾åˆ°nameï¼Œå¹¶è®¾ç½®å¯¹åº”çš„value
+ * @description: ²éÕÒµ½name£¬²¢ÉèÖÃ¶ÔÓ¦µÄvalue
  * @param {conststring} s
  * @param {constdouble} d
  */
@@ -69,7 +69,7 @@ void set_value(const string s, const double d) {
 }
 
 /**
- * @description: nameæ˜¯å¦å·²ç»è¢«å£°æ˜
+ * @description: nameÊÇ·ñÒÑ¾­±»ÉùÃ÷
  * @param {conststring} s
  */
 bool is_declared(const string s) {
@@ -77,7 +77,7 @@ bool is_declared(const string s) {
 }
 
 /**
- * @description: æ·»åŠ  name-value å¯¹, å¹¶è¿”å›value
+ * @description: Ìí¼Ó name-value ¶Ô, ²¢·µ»Øvalue
  * @param {conststring} s
  * @param {constdouble} d
  */
@@ -90,30 +90,30 @@ double define_name(const string s, const double d) {
 }
 
 /**
- * @description: ä»cinå­˜æ”¾æœ‰æ•ˆToken, Token_streamçš„è¿ä½œæ¨¡å¼ä¸cinå·®ä¸å¤š
+ * @description: ´Ócin´æ·ÅÓĞĞ§Token, Token_streamµÄÔË×÷Ä£Ê½Óëcin²î²»¶à
  */
 class Token_stream {
     public:
         Token_stream(): full(false), buffer('\0') {}
-        Token get();                                // get a Token å¹¶æ”¾åˆ°streamä¸­
+        Token get();                                // get a Token ²¢·Åµ½streamÖĞ
         void putback(const Token t);                // put a Token back
-        void ignore(const char c);                  // ä¸¢å¼ƒå­—ç¬¦
+        void ignore(const char c);                  // ¶ªÆú×Ö·û
     private:
-        bool full;                                  // Token æ˜¯å¦åœ¨bufferä¸­
-        Token buffer;                               // å­˜æ”¾Tokençš„buffer
+        bool full;                                  // Token ÊÇ·ñÔÚbufferÖĞ
+        Token buffer;                               // ´æ·ÅTokenµÄbuffer
 };
 
-constexpr char number = '8';                        // t.kind == number è¡¨ç¤º t æ˜¯ä¸€ä¸ª number Token
-constexpr char quit = 'q';                          // t.kind == quit è¡¨ç¤º t æ˜¯ä¸€ä¸ª quit Token
-constexpr char print = ';';                         // t.kind == print è¡¨ç¤º t æ˜¯ä¸€ä¸ª print Token
+constexpr char number = '8';                        // t.kind == number ±íÊ¾ t ÊÇÒ»¸ö number Token
+constexpr char quit = 'q';                          // t.kind == quit ±íÊ¾ t ÊÇÒ»¸ö quit Token
+constexpr char print = ';';                         // t.kind == print ±íÊ¾ t ÊÇÒ»¸ö print Token
 
 constexpr char name = 'a';                          // name token
-constexpr char let = 'L';                           // å£°æ˜ token
-constexpr char* declkey = "let";                    // å£°æ˜ keyword
+constexpr char let = 'L';                           // ÉùÃ÷ token
+constexpr char* declkey = "let";                    // ÉùÃ÷ keyword
 constexpr char func = 'F';                          // function Token
 
 /**
- * @description: è·å–ä¸€ä¸ªTokenå¹¶æ”¾å…¥åˆ°streamä¸­
+ * @description: »ñÈ¡Ò»¸öToken²¢·ÅÈëµ½streamÖĞ
  */
 Token Token_stream::get() {
     Token t{'\0'};
@@ -167,7 +167,7 @@ Token Token_stream::get() {
                     while (cin.get(ch) && (isalpha(ch) || isdigit(ch))) {
                         s += ch;
                     }
-                    cin.putback(ch);            // å°†å¤šè¯»å–çš„éå­—æ¯oréæ•°å­—é€€å›åˆ°cinä¸­
+                    cin.putback(ch);            // ½«¶à¶ÁÈ¡µÄ·Ç×ÖÄ¸or·ÇÊı×ÖÍË»Øµ½cinÖĞ
                     if (s == declkey) {
                         t.kind = let;
                     } else if (ch == '(') {
@@ -197,7 +197,7 @@ void Token_stream::putback(const Token t) {
 }
 
 /**
- * @description: å¿½ç•¥æ‰è¾“å…¥æµçš„å‰©ä½™éƒ¨åˆ†
+ * @description: ºöÂÔµôÊäÈëÁ÷µÄÊ£Óà²¿·Ö
  */
 void Token_stream::ignore(const char c) {
     if (full && c == buffer.kind) {
@@ -205,7 +205,7 @@ void Token_stream::ignore(const char c) {
     } else {
         full = false;
         cin.clear();
-        cin.ignore(cin.rdbuf()->in_avail(), c);             // æŠŠè¾“å…¥æµçš„å‰©ä½™éƒ¨åˆ†å…¨éƒ¨å¿½ç•¥æ‰,å¦‚æœé‡åˆ°cå°†æå‰ç»ˆæ­¢
+        cin.ignore(cin.rdbuf()->in_avail(), c);             // °ÑÊäÈëÁ÷µÄÊ£Óà²¿·ÖÈ«²¿ºöÂÔµô,Èç¹ûÓöµ½c½«ÌáÇ°ÖÕÖ¹
     }
 }
 
@@ -285,7 +285,7 @@ double expression() {
 }
 
 /**
- * @description: å£°æ˜å®šä¹‰å˜é‡
+ * @description: ÉùÃ÷¶¨Òå±äÁ¿
  */
 double declaration() {
     Token t = ts.get();
@@ -306,8 +306,8 @@ double declaration() {
 }
 
 /**
- * @description: æ•°å­¦å‡½æ•°
- * @param {const} string t æ•°å­¦å‡½æ•°å
+ * @description: ÊıÑ§º¯Êı
+ * @param {const} string t ÊıÑ§º¯ÊıÃû
  */
 double funct(const string& t) {
     if (t != "sqrt") {
@@ -334,15 +334,15 @@ double statement() {
 }
 
 /**
- * @description: å¿½ç•¥æ‰è¾“å…¥æµçš„å‰©ä½™éƒ¨åˆ†
+ * @description: ºöÂÔµôÊäÈëÁ÷µÄÊ£Óà²¿·Ö
  */
 void clean_up_mess() {
     ts.ignore(print);
 }
 
 void calculate() {
-    constexpr char* prompt = "> ";          // æç¤ºç¬¦
-    constexpr char* result = "= ";          // ç»“æœ
+    constexpr char* prompt = "> ";          // ÌáÊ¾·û
+    constexpr char* result = "= ";          // ½á¹û
 
     while (true) try {
         cout << prompt;

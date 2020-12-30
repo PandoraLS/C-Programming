@@ -1,19 +1,34 @@
 /*
  * @Author: seenli
- * @Date: 2020-12-30 21:06:41
+ * @Date: 2020-12-30 23:39:11
  * @LastEditors: seenli
- * @LastEditTime: 2020-12-30 23:29:24
- * @FilePath: \Ch07\ch07_drill_6.cpp
+ * @LastEditTime: 2020-12-31 00:21:30
+ * @FilePath: \Ch07\ch07_drill_9.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
 
 /*
-	Section 7 Drill 6
-	Add a predefined name k meaning 1000
+	Section 7 Drill 7
+	give the calculator a square root function
+	Section 7 Drill 8
+	check for negative numbers before using square root function and give an error
+	Section 7 Drill 9
+	give the calculator a power function pow(val, pow)
 */
+
+
 
 #include "std_lib_facilities.h"
 
+
+constexpr char number = '8';                        // t.kind == number 表示 t 是一个 number Token
+constexpr char quit = 'q';                          // t.kind == quit 表示 t 是一个 quit Token
+constexpr char print = ';';                         // t.kind == print 表示 t 是一个 print Token
+
+constexpr char name = 'a';                          // name token
+constexpr char let = 'L';                           // 声明 token
+constexpr char* declkey = "let";                    // 声明 keyword
+constexpr char func = 'F';                          // function Token
 /**
  * @description: 存放数字和操作符等
  */
@@ -101,13 +116,7 @@ class Token_stream {
         Token buffer;                               // 存放Token的buffer
 };
 
-constexpr char number = '8';                        // t.kind == number 表示 t 是一个 number Token
-constexpr char quit = 'q';                          // t.kind == quit 表示 t 是一个 quit Token
-constexpr char print = ';';                         // t.kind == print 表示 t 是一个 print Token
 
-constexpr char name = 'a';                          // name token
-constexpr char let = 'L';                           // 声明 token
-constexpr char* declkey = "let";                    // 声明 keyword
 
 /**
  * @description: 获取一个Token并放入到stream中
@@ -129,6 +138,7 @@ Token Token_stream::get() {
             case '-':
             case '*':
             case '/':
+			case ',':
                 t.kind = ch;
                 break;
             case '=':
@@ -167,6 +177,9 @@ Token Token_stream::get() {
                     cin.putback(ch);            // 将多读取的非字母or非数字退回到cin中
                     if (s == declkey) {
                         t.kind = let;
+                    } else if (ch == '(') {
+                        t.kind = func;
+                        t.name = s;
                     } else {
                         t.kind = name;
                         t.name = s;
@@ -299,11 +312,67 @@ double declaration() {
     return d;
 }
 
+/**
+ * @description: 数学函数
+ * @param {const} string s 输入字符
+ */
+double funct(const string& s) {
+    Token t = ts.get();
+    double d{};
+    vector<double> func_args;
+    if (t.kind != '(') {
+        error("expected '(', malformed function call");
+    } else {
+        do {
+            t = ts.get();
+            // 是否有参数是函数调用
+            if (t.kind == func) {
+                t.kind = number;
+                // 递归调用
+                t.value = funct(t.name);
+                ts.putback(t);
+            }
+
+            // 检查是否无参数
+            if (t.kind == ')') {
+                break;
+            } else {
+                ts.putback(t);
+            }
+
+            // push有效函数参数
+            func_args.push_back(expression());
+            t = ts.get();
+            if (t.kind == ')') break;
+            if (t.kind != ',') error("expected ')', 畸形的函数调用");
+        } while (t.kind == ',');
+    }
+
+    if (s == "sqrt") {
+        if (func_args.size() != 1) error("sqrt() expects 1 argument");
+        if (func_args[0] < 0) error("sqrt() expects argument value >= 0");
+        d = sqrt(func_args[0]);
+    } else if (s == "pow") {
+        if (func_args.size() != 2) error("pow() expects 2 arguments");
+        d = func_args[0];
+        auto multiplier = func_args[0];
+        int p = narrow_cast<int>(func_args[1]);
+        for (; p > 1; --p) {
+            d *= multiplier;
+        }
+    } else {
+        error("unknown function");
+    }
+    return d;
+}
+
 double statement() {
     Token t = ts.get();
     switch(t.kind) {
         case let:
             return declaration();
+        case func:
+            return funct(t.name);
         default:
             ts.putback(t);
             return expression();
@@ -320,7 +389,7 @@ void clean_up_mess() {
 void calculate() {
     constexpr char* prompt = "> ";          // 提示符
     constexpr char* result = "= ";          // 结果
-    define_name ("k", 1000.0);
+
     while (true) try {
         cout << prompt;
         Token t = ts.get();
