@@ -1,5 +1,5 @@
 {
-    "files.encoding": "utf8",
+    "files.encoding": "gbk",
     "files.associations": {
         "iostream": "c",
         "*.tcc": "cpp",
@@ -85,5 +85,6 @@
     //函数注释
     "fileheader.cursorMode": {
         "description": ""
-    }
+    },
+	"editor.mouseWheelZoom": true,
 }
