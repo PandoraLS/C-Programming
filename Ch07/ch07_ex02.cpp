@@ -1,34 +1,42 @@
 /*
  * @Author: seenli
- * @Date: 2020-12-30 23:39:11
+ * @Date: 2020-12-31 13:31:19
  * @LastEditors: seenli
- * @LastEditTime: 2020-12-31 12:58:07
- * @FilePath: \Ch07\ch07_drill_9.cpp
+ * @LastEditTime: 2020-12-31 15:59:05
+ * @FilePath: \Ch07\ch07_ex02.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
 
 /*
-	Section 7 Drill 7
-	give the calculator a square root function
-	Section 7 Drill 8
-	check for negative numbers before using square root function and give an error
-	Section 7 Drill 9
-	give the calculator a power function pow(val, pow)
+	copied from drill 11 removed drill 10 stuff
+	also added modulo
+	section 7 exercise 1
+	allow underscores in the calculator's variable names
+
+	section 7 exercise 2
+	modified how function is handled.  place call in primary and removed recursive call from function handler
+	provide assignment operator = so can reassign already declared variables with let.
+	The issue with this is to make sure there is no proceeding expression.
+	example:
+	let x = 2; x + 3; x = 4; //is ok
+	x = 5 + x; //is ok were existing value of x added to 5 then new value into x
+	x + 4 - x = 5; is not ok
+	let y = 3; x = y = 5; is not ok 
 */
-
-
 
 #include "std_lib_facilities.h"
 
 
 constexpr char number = '8';                        // t.kind == number 表示 t 是一个 number Token
 constexpr char quit = 'q';                          // t.kind == quit 表示 t 是一个 quit Token
+constexpr char* declexit = "exit";                  // 退出关键字
 constexpr char print = ';';                         // t.kind == print 表示 t 是一个 print Token
 
 constexpr char name = 'a';                          // name token
 constexpr char let = 'L';                           // 声明 token
 constexpr char* declkey = "let";                    // 声明 keyword
 constexpr char func = 'F';                          // function Token
+
 /**
  * @description: 存放数字和操作符等
  */
@@ -36,7 +44,7 @@ struct Token {
     char kind;
     double value;
     string name;
-    Token(char ch, double val = 0.0) : kind(ch), value(val) {}
+    Token(char ch, double val = 0.0) : kind(ch), value(val), name("") {}
     Token(char ch, string s): kind(ch), value(0.0), name(s) {} 
 };
 
@@ -139,6 +147,7 @@ Token Token_stream::get() {
             case '*':
             case '/':
 			case ',':
+            case '%':
                 t.kind = ch;
                 break;
             case '=':
@@ -168,10 +177,10 @@ Token Token_stream::get() {
                     break;
                 }
             default:
-                if (isalpha(ch)) {
+                if (isalpha(ch) || (ch == '_')) {
                     string s;
                     s += ch;
-                    while (cin.get(ch) && (isalpha(ch) || isdigit(ch))) {
+                    while (cin.get(ch) && (isalpha(ch)  || (ch == '_') || isdigit(ch))) {
                         s += ch;
                     }
                     cin.putback(ch);            // 将多读取的非字母or非数字退回到cin中
@@ -180,6 +189,8 @@ Token Token_stream::get() {
                     } else if (ch == '(') {
                         t.kind = func;
                         t.name = s;
+                    } else if (s == declexit) {
+                        t.kind = quit;
                     } else {
                         t.kind = name;
                         t.name = s;
@@ -219,6 +230,7 @@ void Token_stream::ignore(const char c) {
 Token_stream ts;
 
 double expression();
+double funct(const string& s);
 
 double primary() {
     Token t = ts.get();
@@ -231,19 +243,27 @@ double primary() {
                 if (t.kind != ')') {
                     error("')' expected");
                 }
-                return d;
+                break;
             }
         case '-':
-            return -1 * primary();
+            d = -1 * primary();
+            break;
         case '+':
-            return primary();
+            d = primary();
+            break;
         case number:
-            return t.value;
+            d = t.value;
+            break;
         case name:
-            return get_value(t.name);
+            d = get_value(t.name);
+            break;
+        case func:
+            d = funct(t.name);
+            break;
         default:
             error("primary expected");
     }
+    return d;
 }
 
 
@@ -262,6 +282,15 @@ double term() {
                         error("divide by zero");
                     }
                     left /= d;
+                    break;
+                }
+            case '%':
+                {
+                    double d = primary();
+                    if (d == 0) {
+                        error("divide by zero");
+                    }
+                    left = fmod(left, d);
                     break;
                 }
             default:
@@ -312,51 +341,17 @@ double declaration() {
     return d;
 }
 
-/**
- * @description: 数学函数
- * @param {const} string s 输入字符
- */
-double funct(const string& s) {
-    Token t = ts.get();
+double func_availible(const string& s, const vector<double>& args) {
     double d{};
-    vector<double> func_args;
-    if (t.kind != '(') {
-        error("expected '(', malformed function call");
-    } else {
-        do {
-            t = ts.get();
-            // 是否有参数是函数调用
-            if (t.kind == func) {
-                t.kind = number;
-                // 递归调用
-                t.value = funct(t.name);
-                ts.putback(t);
-            }
-
-            // 检查是否无参数
-            if (t.kind == ')') {
-                break;
-            } else {
-                ts.putback(t);
-            }
-
-            // push有效函数参数
-            func_args.push_back(expression());
-            t = ts.get();
-            if (t.kind == ')') break;
-            if (t.kind != ',') error("expected ')', 畸形的函数调用");
-        } while (t.kind == ',');
-    }
-
     if (s == "sqrt") {
-        if (func_args.size() != 1) error("sqrt() expects 1 argument");
-        if (func_args[0] < 0) error("sqrt() expects argument value >= 0");
-        d = sqrt(func_args[0]);
+        if (args.size() != 1) error("sqrt() expects 1 argument");
+        if (args[0] < 0) error("sqrt() expects argument value >= 0");
+        d = sqrt(args[0]);
     } else if (s == "pow") {
-        if (func_args.size() != 2) error("pow() expects 2 arguments");
-        d = func_args[0];
-        auto multiplier = func_args[0];
-        int p = narrow_cast<int>(func_args[1]);
+        if (args.size() != 2) error("pow() expects 2 arguments");
+        d = args[0];
+        auto multiplier = args[0];
+        int p = narrow_cast<int>(args[1]);
         for (; p > 1; --p) {
             d *= multiplier;
         }
@@ -366,16 +361,62 @@ double funct(const string& s) {
     return d;
 }
 
+/**
+ * @description: 数学函数
+ * @param {const} string s 输入字符
+ */
+double funct(const string& s) {
+    Token t = ts.get();
+    vector<double> func_args;
+    if (t.kind != '(') {
+        error("expected '(', malformed function call");
+    } else {
+        do {
+            t = ts.get();
+
+            // 参数检查
+            if (t.kind != ')') {
+                ts.putback(t);
+                func_args.push_back(expression());
+                t = ts.get();
+                if (t.kind != ',' && t.kind != ')') error("expected ')', 畸形的函数调用");
+            }
+        } while (t.kind != ')');
+    }
+    return func_availible(s, func_args);
+}
+
 double statement() {
     Token t = ts.get();
     switch(t.kind) {
         case let:
             return declaration();
-        case func:
-            return funct(t.name);
+        case name:
+            {
+                char ch{};
+                while(cin.get(ch) && ch == 32);     // 吃掉空格
+                if (ch != '=') {
+                    cin.putback(ch);
+                } else {
+                    auto d = expression();
+                    Token t2 = ts.get();
+                    if (t2.kind != print) error("expected print Token ", print);
+                    set_value(t.name, d);
+                    cin.putback(print);
+                }
+            }
+            [[fallthrough]];                        // 指示来自前一个case标签的失败是故意的，不应该由警告失败的编译器诊断
         default:
             ts.putback(t);
-            return expression();
+            auto d = expression();
+
+            // 在返回之前是否有以下逗号
+            t = ts.get();
+            if (t.kind == ',') {
+                error("unexpected Token ", t.kind);
+            }
+            ts.putback(t);
+            return d;
     }
 }
 

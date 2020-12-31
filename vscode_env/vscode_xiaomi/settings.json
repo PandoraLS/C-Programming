@@ -85,6 +85,5 @@
     //函数注释
     "fileheader.cursorMode": {
         "description": ""
-    },
-	"editor.mouseWheelZoom": true,
+    }
 }

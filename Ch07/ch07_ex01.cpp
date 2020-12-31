@@ -1,28 +1,25 @@
 /*
  * @Author: seenli
- * @Date: 2020-12-30 23:39:11
+ * @Date: 2020-12-31 13:17:34
  * @LastEditors: seenli
- * @LastEditTime: 2020-12-31 12:58:07
- * @FilePath: \Ch07\ch07_drill_9.cpp
+ * @LastEditTime: 2020-12-31 13:28:31
+ * @FilePath: \Ch07\ch07_ex01.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
 
 /*
-	Section 7 Drill 7
-	give the calculator a square root function
-	Section 7 Drill 8
-	check for negative numbers before using square root function and give an error
-	Section 7 Drill 9
-	give the calculator a power function pow(val, pow)
+	copied from drill 11 removed drill 10 stuff
+	also added modulo
+	section 7 exercise 1
+	allow underscores in the calculator's variable names
 */
-
-
 
 #include "std_lib_facilities.h"
 
 
 constexpr char number = '8';                        // t.kind == number 表示 t 是一个 number Token
 constexpr char quit = 'q';                          // t.kind == quit 表示 t 是一个 quit Token
+constexpr char* declexit = "exit";                  // 退出关键字
 constexpr char print = ';';                         // t.kind == print 表示 t 是一个 print Token
 
 constexpr char name = 'a';                          // name token
@@ -139,6 +136,7 @@ Token Token_stream::get() {
             case '*':
             case '/':
 			case ',':
+            case '%':
                 t.kind = ch;
                 break;
             case '=':
@@ -168,10 +166,10 @@ Token Token_stream::get() {
                     break;
                 }
             default:
-                if (isalpha(ch)) {
+                if (isalpha(ch) || (ch == '_')) {
                     string s;
                     s += ch;
-                    while (cin.get(ch) && (isalpha(ch) || isdigit(ch))) {
+                    while (cin.get(ch) && (isalpha(ch)  || (ch == '_') || isdigit(ch))) {
                         s += ch;
                     }
                     cin.putback(ch);            // 将多读取的非字母or非数字退回到cin中
@@ -180,6 +178,8 @@ Token Token_stream::get() {
                     } else if (ch == '(') {
                         t.kind = func;
                         t.name = s;
+                    } else if (s == declexit) {
+                        t.kind = quit;
                     } else {
                         t.kind = name;
                         t.name = s;
@@ -262,6 +262,15 @@ double term() {
                         error("divide by zero");
                     }
                     left /= d;
+                    break;
+                }
+            case '%':
+                {
+                    double d = primary();
+                    if (d == 0) {
+                        error("divide by zero");
+                    }
+                    left = fmod(left, d);
                     break;
                 }
             default:

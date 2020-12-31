@@ -1,34 +1,48 @@
 /*
  * @Author: seenli
- * @Date: 2020-12-30 23:39:11
+ * @Date: 2020-12-31 16:13:16
  * @LastEditors: seenli
- * @LastEditTime: 2020-12-31 12:58:07
- * @FilePath: \Ch07\ch07_drill_9.cpp
+ * @LastEditTime: 2020-12-31 17:46:33
+ * @FilePath: \Ch07\ch07_ex03.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
 
 /*
-	Section 7 Drill 7
-	give the calculator a square root function
-	Section 7 Drill 8
-	check for negative numbers before using square root function and give an error
-	Section 7 Drill 9
-	give the calculator a power function pow(val, pow)
+	copied from drill 11 removed drill 10 stuff
+	also added modulo
+	section 7 exercise 1
+	allow underscores in the calculator's variable names
+
+	section 7 exercise 2
+	modified how function is handled.  place call in primary and removed recursive call from function handler
+	provide assignment operator = so can reassign already declared variables with let.
+	The issue with this is to make sure there is no proceeding expression.
+	example:
+	let x = 2; x + 3; x = 4; //is ok
+	x = 5 + x; //is ok were existing value of x added to 5 then new value into x
+	x + 4 - x = 5; is not ok
+	let y = 3; x = y = 5; is not ok ?
+
+	section 7 exercise 3
+	Provide named constants that you can't change the value of
 */
 
 
 
 #include "std_lib_facilities.h"
 
+const char number = '8';                        // t.kind == number 表示 t 是一个 number Token
+const char quit = 'q';                          // t.kind == quit 表示 t 是一个 quit Token
+const string declexit = "exit";                  // 退出关键字
+const char print = ';';                         // t.kind == print 表示 t 是一个 print Token
 
-constexpr char number = '8';                        // t.kind == number 表示 t 是一个 number Token
-constexpr char quit = 'q';                          // t.kind == quit 表示 t 是一个 quit Token
-constexpr char print = ';';                         // t.kind == print 表示 t 是一个 print Token
+const char name = 'a';                          // name token
+const char let = 'L';                           // 声明 token
+const string declkey = "let";                   // 声明 keyword
+const char constant = 'C';                      // 声明 常量 token
+const string declkey_const = "const";
+const char func = 'F';                          // function Token
 
-constexpr char name = 'a';                          // name token
-constexpr char let = 'L';                           // 声明 token
-constexpr char* declkey = "let";                    // 声明 keyword
-constexpr char func = 'F';                          // function Token
 /**
  * @description: 存放数字和操作符等
  */
@@ -36,7 +50,7 @@ struct Token {
     char kind;
     double value;
     string name;
-    Token(char ch, double val = 0.0) : kind(ch), value(val) {}
+    Token(char ch, double val = 0.0) : kind(ch), value(val), name("") {}
     Token(char ch, string s): kind(ch), value(0.0), name(s) {} 
 };
 
@@ -46,6 +60,7 @@ struct Token {
 struct Variable {
     string name;
     double value{};
+    bool is_const{false};
 };
 
 /**
@@ -78,6 +93,9 @@ void set_value(const string s, const double d) {
     if (vt_itr == names.cend()) {
         error("set: undefined name ", s);
     }
+    if (vt_itr->is_const) {
+        error(s, ": is a constant");
+    }
     vt_itr->value = d;
 }
 
@@ -94,11 +112,11 @@ bool is_declared(const string s) {
  * @param {conststring} s
  * @param {constdouble} d
  */
-double define_name(const string s, const double d) {
+double define_name(const string s, const double d, const bool set_const = false) {
     if (is_declared(s)) {
         error(s, " declared twice");
     }
-    names.push_back(Variable{s, d});
+    names.push_back(Variable{s, d, set_const});
     return d;
 }
 
@@ -139,13 +157,8 @@ Token Token_stream::get() {
             case '*':
             case '/':
 			case ',':
-                t.kind = ch;
-                break;
+            case '%':
             case '=':
-                if (this->buffer.kind != let) {
-                    const string s = (this->buffer.kind == name ? this->buffer.name : to_string(this->buffer.value));
-                    error(s, " can not be re-assigned");
-                }
                 t.kind = ch;
                 break;
             case '.':
@@ -168,18 +181,22 @@ Token Token_stream::get() {
                     break;
                 }
             default:
-                if (isalpha(ch)) {
+                if (isalpha(ch) || (ch == '_')) {
                     string s;
                     s += ch;
-                    while (cin.get(ch) && (isalpha(ch) || isdigit(ch))) {
+                    while (cin.get(ch) && (isalpha(ch)  || (ch == '_') || isdigit(ch))) {
                         s += ch;
                     }
                     cin.putback(ch);            // 将多读取的非字母or非数字退回到cin中
                     if (s == declkey) {
                         t.kind = let;
+                    } else if (s == declkey_const) {
+                        t.kind = constant;
                     } else if (ch == '(') {
                         t.kind = func;
                         t.name = s;
+                    } else if (s == declexit) {
+                        t.kind = quit;
                     } else {
                         t.kind = name;
                         t.name = s;
@@ -219,6 +236,7 @@ void Token_stream::ignore(const char c) {
 Token_stream ts;
 
 double expression();
+double funct(const string& s);
 
 double primary() {
     Token t = ts.get();
@@ -231,19 +249,27 @@ double primary() {
                 if (t.kind != ')') {
                     error("')' expected");
                 }
-                return d;
+                break;
             }
         case '-':
-            return -1 * primary();
+            d = -1 * primary();
+            break;
         case '+':
-            return primary();
+            d = primary();
+            break;
         case number:
-            return t.value;
+            d = t.value;
+            break;
         case name:
-            return get_value(t.name);
+            d = get_value(t.name);
+            break;
+        case func:
+            d = funct(t.name);
+            break;
         default:
             error("primary expected");
     }
+    return d;
 }
 
 
@@ -262,6 +288,15 @@ double term() {
                         error("divide by zero");
                     }
                     left /= d;
+                    break;
+                }
+            case '%':
+                {
+                    double d = primary();
+                    if (d == 0) {
+                        error("divide by zero");
+                    }
+                    left = fmod(left, d);
                     break;
                 }
             default:
@@ -284,6 +319,7 @@ double expression() {
             case '-':
                 left -= term();
                 break;
+            case ',':                       // let fall through
             default:
                 ts.putback(t);
                 return left;
@@ -294,7 +330,7 @@ double expression() {
 /**
  * @description: 声明定义变量
  */
-double declaration() {
+double declaration(const bool is_const = false) {
     Token t = ts.get();
     if (t.kind != name) {
         error("name expected in declaration");
@@ -308,55 +344,22 @@ double declaration() {
         error("= missing in declaration of ", t.name);
     }
     double d = expression();
-    define_name(t.name, d);
+    define_name(t.name, d, is_const);
     return d;
 }
 
-/**
- * @description: 数学函数
- * @param {const} string s 输入字符
- */
-double funct(const string& s) {
-    Token t = ts.get();
+
+double func_availible(const string& s, const vector<double>& args) {
     double d{};
-    vector<double> func_args;
-    if (t.kind != '(') {
-        error("expected '(', malformed function call");
-    } else {
-        do {
-            t = ts.get();
-            // 是否有参数是函数调用
-            if (t.kind == func) {
-                t.kind = number;
-                // 递归调用
-                t.value = funct(t.name);
-                ts.putback(t);
-            }
-
-            // 检查是否无参数
-            if (t.kind == ')') {
-                break;
-            } else {
-                ts.putback(t);
-            }
-
-            // push有效函数参数
-            func_args.push_back(expression());
-            t = ts.get();
-            if (t.kind == ')') break;
-            if (t.kind != ',') error("expected ')', 畸形的函数调用");
-        } while (t.kind == ',');
-    }
-
     if (s == "sqrt") {
-        if (func_args.size() != 1) error("sqrt() expects 1 argument");
-        if (func_args[0] < 0) error("sqrt() expects argument value >= 0");
-        d = sqrt(func_args[0]);
+        if (args.size() != 1) error("sqrt() expects 1 argument");
+        if (args[0] < 0) error("sqrt() expects argument value >= 0");
+        d = sqrt(args[0]);
     } else if (s == "pow") {
-        if (func_args.size() != 2) error("pow() expects 2 arguments");
-        d = func_args[0];
-        auto multiplier = func_args[0];
-        int p = narrow_cast<int>(func_args[1]);
+        if (args.size() != 2) error("pow() expects 2 arguments");
+        d = args[0];
+        auto multiplier = args[0];
+        auto p = narrow_cast<int>(args[1]);
         for (; p > 1; --p) {
             d *= multiplier;
         }
@@ -366,17 +369,61 @@ double funct(const string& s) {
     return d;
 }
 
+/**
+ * @description: 数学函数
+ * @param {const} string s 输入字符
+ */
+double funct(const string& s) {
+    Token t = ts.get();
+    vector<double> func_args;
+    if (t.kind != '(') {
+        error("expected '(', malformed function call");
+    } else {
+        do {
+            t = ts.get();
+
+            // 参数检查
+            if (t.kind != ')') {
+                ts.putback(t);
+                func_args.push_back(expression());
+                t = ts.get();
+                if (t.kind != ',' && t.kind != ')') error("expected ')', 畸形的函数调用");
+            }
+        } while (t.kind != ')');
+    }
+    return func_availible(s, func_args);
+}
+
 double statement() {
     Token t = ts.get();
+    double d{};
     switch(t.kind) {
         case let:
-            return declaration();
-        case func:
-            return funct(t.name);
+            d = declaration();
+            break;
+        case constant:
+            d = declaration(true);
+            break;
+        case name:
+            {
+                Token t2 = ts.get();
+
+                if (t2.kind != '=') {
+                    cin.putback(t2.kind);
+                    ts.putback(t);
+                    d = expression();
+                } else {
+                    d = expression();
+                    set_value(t.name, d);
+                }
+                break;
+            }
         default:
             ts.putback(t);
-            return expression();
+            d = expression();
     }
+
+    return d;
 }
 
 /**
@@ -387,8 +434,8 @@ void clean_up_mess() {
 }
 
 void calculate() {
-    constexpr char* prompt = "> ";          // 提示符
-    constexpr char* result = "= ";          // 结果
+    const string prompt = "> ";          // 提示符
+    const string result = "= ";          // 结果
 
     while (true) try {
         cout << prompt;
@@ -413,7 +460,6 @@ int main()
 try {
     cin.sync_with_stdio(false);
     calculate();
-    keep_window_open();
     return 0;
 }
 catch (exception& e) {
@@ -426,3 +472,4 @@ catch (...) {
     keep_window_open();
     return 2;
 }
+

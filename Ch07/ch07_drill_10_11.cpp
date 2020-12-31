@@ -1,9 +1,9 @@
 /*
  * @Author: seenli
- * @Date: 2020-12-30 23:39:11
+ * @Date: 2020-12-31 12:58:46
  * @LastEditors: seenli
- * @LastEditTime: 2020-12-31 12:58:07
- * @FilePath: \Ch07\ch07_drill_9.cpp
+ * @LastEditTime: 2020-12-31 13:23:44
+ * @FilePath: \Ch07\ch07_drill_10_11.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
 
@@ -14,8 +14,11 @@
 	check for negative numbers before using square root function and give an error
 	Section 7 Drill 9
 	give the calculator a power function pow(val, pow)
+	Section 7 Drill 10
+	change declaration keyword from let to #
+    Section 7 Drill 11
+	change declaration keyword quit to exit
 */
-
 
 
 #include "std_lib_facilities.h"
@@ -23,11 +26,12 @@
 
 constexpr char number = '8';                        // t.kind == number 表示 t 是一个 number Token
 constexpr char quit = 'q';                          // t.kind == quit 表示 t 是一个 quit Token
+constexpr char* declexit = "exit";                  // 退出关键字
 constexpr char print = ';';                         // t.kind == print 表示 t 是一个 print Token
 
 constexpr char name = 'a';                          // name token
 constexpr char let = 'L';                           // 声明 token
-constexpr char* declkey = "let";                    // 声明 keyword
+constexpr char* declkey = "#";                      // 声明 keyword
 constexpr char func = 'F';                          // function Token
 /**
  * @description: 存放数字和操作符等
@@ -168,18 +172,20 @@ Token Token_stream::get() {
                     break;
                 }
             default:
-                if (isalpha(ch)) {
+                if (isalpha(ch) || (strlen(declkey) == 1)) {
                     string s;
                     s += ch;
-                    while (cin.get(ch) && (isalpha(ch) || isdigit(ch))) {
-                        s += ch;
+                    if (ch != declkey[0]) {
+                        while (cin.get(ch) && (isalpha(ch) || isdigit(ch))) s += ch;
+                        cin.putback(ch);            // 将多读取的非字母or非数字退回到cin中
                     }
-                    cin.putback(ch);            // 将多读取的非字母or非数字退回到cin中
                     if (s == declkey) {
                         t.kind = let;
                     } else if (ch == '(') {
                         t.kind = func;
                         t.name = s;
+                    } else if (s == declexit) {
+                        t.kind = quit;
                     } else {
                         t.kind = name;
                         t.name = s;
