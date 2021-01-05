@@ -10,5 +10,5 @@ c_cpp_properities.json已经包含以下内容，所以不需要再次添加includePath了
 "includePath": [
     "${workspaceFolder}/**"
 ],
-编译链接其他程序的时候，多几个token.cpp和symbol_table.cpp这样的，其实并没有影响
+编译链接其他程序的时候，多几个token.cpp和symbol_table.cpp这样的，不影响其他程序的编译运行
 
