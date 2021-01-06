@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2020-09-28 14:30:55
  * @LastEditors: seenli
- * @LastEditTime: 2021-01-06 16:18:32
+ * @LastEditTime: 2021-01-06 18:47:14
  * @FilePath: \Ch09\Chrono.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -168,7 +168,7 @@ namespace Chrono {
 	}
 
 	bool operator==(const Date& a, const Date& b) {
-		return a.m_days = b.m_days;
+		return a.m_days == b.m_days;
 	}
 
 	bool operator!=(const Date& a, const Date& b) {
@@ -192,7 +192,7 @@ namespace Chrono {
 	}
 
 	std::ostream& operator<<(std::ostream& os, const Date& d) {
-		return os << '(' << d.m_yar << ',' << (int)d.m_month << ',' << d.m_day << ')';
+		return os << '(' << d.m_year << ',' << (int)d.m_month << ',' << d.m_day << ')';
 	}
 
 	std::istream& operator>>(std::istream& is, Date& dd) {
