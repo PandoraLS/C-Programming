@@ -26,12 +26,13 @@
 
 int main() 
 try {
-	char c{};
-	std::string name;
+	
 	std::vector<std::string> names;
     std::cout << "Enter names separated by ',' or new line. ctrl-z to exit\n";
-
+	
 	// 录入多个字符串的方式
+	char c{};
+	std::string name;
 	while (std::cin.get(c)) {
 		if (c != ',' && c != '\n') {
 			if (!name.empty()) {
