@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2021-01-06 20:28:49
  * @LastEditors: seenli
- * @LastEditTime: 2021-01-06 20:37:16
+ * @LastEditTime: 2021-01-08 13:23:56
  * @FilePath: \Ch09\Patron.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -28,6 +28,7 @@ namespace library {
         return get_fees();
     }
 
+    // Ç··ÑµÄ
     bool Patron::is_outstanding_fee() const {
         return m_fees >= 0.01;
     }
