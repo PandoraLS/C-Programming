@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2021-01-08 13:53:27
  * @LastEditors: seenli
- * @LastEditTime: 2021-01-08 20:43:29
+ * @LastEditTime: 2021-01-08 20:53:19
  * @FilePath: \Ch09\Library.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -70,29 +70,29 @@ namespace library {
     //如果用户欠费, 报告错误
     //如果没有错误, 创建一个事务放置到事务向量
     void Library::check_out_book(Book& b, Patron& p) {
-        auto b_itr{std::find(m_books.begin(), m_books.end(), b)};
+        // auto b_itr{std::find(m_books.begin(), m_books.end(), b)};
         // TODO 这里报错：没有与参数列表匹配的 函数模板 "std::find" 实例
         // 目前(2021年1月8日)尚不清楚是什么原因导致的, 暂时不做处理
 
-        if (b_itr == m_books.cend()) {
-            throw std::runtime_error("Library does not have this book");
-        }
-        if (b_itr->is_checked_out()) {
-            throw std::runtime_error("Book is checked out");
-        }
+        // if (b_itr == m_books.cend()) {
+        //     throw std::runtime_error("Library does not have this book");
+        // }
+        // if (b_itr->is_checked_out()) {
+        //     throw std::runtime_error("Book is checked out");
+        // }
 
-        auto p_itr{std::find(m_patrons.begin(), m_patrons.end(), p)};
-        if (p_itr == m_patrons.cend()) {
-            throw std::runtime_error("User is not registered");
-        }
-        if (p_itr->is_outstanding_fee()) {
-            throw std::runtime_error("User has outstanding fees");
-        }
+        // auto p_itr{std::find(m_patrons.begin(), m_patrons.end(), p)};
+        // if (p_itr == m_patrons.cend()) {
+        //     throw std::runtime_error("User is not registered");
+        // }
+        // if (p_itr->is_outstanding_fee()) {
+        //     throw std::runtime_error("User has outstanding fees");
+        // }
 
-        b_itr->check_inout(true);
+        // b_itr->check_inout(true);
 
-        // 获取当前日期
-        transactions.push_back(Transaction(*b_itr, *p_itr, Chrono::Date(2020, Chrono::Month::jan, 18)));
+        // // 获取当前日期
+        // transactions.push_back(Transaction(*b_itr, *p_itr, Chrono::Date(2020, Chrono::Month::jan, 18)));
     }
 
     std::vector<std::pair<std::string, double>> Library::get_outstanding_fees() {
