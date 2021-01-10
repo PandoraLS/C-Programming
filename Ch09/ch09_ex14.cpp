@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2021-01-09 14:40:04
  * @LastEditors: seenli
- * @LastEditTime: 2021-01-09 16:50:58
+ * @LastEditTime: 2021-01-10 14:55:56
  * @FilePath: \Ch09\ch09_ex14.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -11,6 +11,18 @@
 /*
 	Section 9 Exercise 14
 	this is the test program Money class.
+	编译链接命令：
+	C:\software\mingw-w64\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe -g C:\Education\code\C-Programming\Ch09\ch09_ex14.cpp C:\Education\code\C-Programming\Ch09\Money.cpp -o C:\Education\code\C-Programming\Ch09\ch09_ex14.exe
+	运行命令：
+	.\ch09_ex14.exe
+	输出结果：
+	$200.00
+	$5123.57
+	$0.01
+	$0.00
+	$1.00
+	$1.00
+	请按任意键继续. . . 
 */
 
 #include "ppp.h"

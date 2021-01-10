@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2021-01-09 13:40:53
  * @LastEditors: seenli
- * @LastEditTime: 2021-01-09 17:07:10
+ * @LastEditTime: 2021-01-10 14:53:28
  * @FilePath: \Ch09\Money.h
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -12,6 +12,7 @@
 
 #include <string>
 #include <vector>
+#include <tuple>
 
 class Money {
     public:
@@ -31,11 +32,17 @@ class Money {
         std::string validate_currency(const std::string& m);
 
         using currencyInfoTuple = std::tuple<std::string, std::string, double>;
-        
         const std::vector<currencyInfoTuple> currencyInfo {
-            {"USD", "$", 1},            // 首先保留美元，因为美元是标准存储货币
+            {"USD", "$", 1}, // keep USD first because used as the standard stored currency
             {"DKK", "Kr", 6.8}
         };
 };
 
 #endif
+
+
+/**
+
+could not convert from '<brace-enclosed initializer list>' to 'const std::vector<std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, double> >'
+
+*/
