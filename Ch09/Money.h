@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2021-01-09 13:40:53
  * @LastEditors: seenli
- * @LastEditTime: 2021-01-10 14:53:28
+ * @LastEditTime: 2021-01-10 15:31:05
  * @FilePath: \Ch09\Money.h
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -39,10 +39,3 @@ class Money {
 };
 
 #endif
-
-
-/**
-
-could not convert from '<brace-enclosed initializer list>' to 'const std::vector<std::tuple<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, double> >'
-
-*/
