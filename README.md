@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-09-20 16:10:02
- * @LastEditTime: 2020-12-30 23:25:02
- * @LastEditors: seenli
+ * @LastEditTime: 2021-01-10 23:11:30
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Ch07d:\code\C-Programming\README.md
 -->
@@ -25,4 +25,3 @@ vscode_env/ 实际上是`.vscode/`环境，由于每个电脑上的c++编译路�
 [PPP](https://github.com/thelastpolaris/Programming-Principles-and-Practice-Using-C-)
 [PPP2](https://github.com/Jtaim/Programming-Principles-and-Practice-Using-Cpp)
 [PPP3](https://github.com/bewuethr/stroustrup-ppp)
-
