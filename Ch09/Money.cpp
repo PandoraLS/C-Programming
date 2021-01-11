@@ -2,10 +2,12 @@
  * @Author: seenli
  * @Date: 2021-01-09 13:48:58
  * @LastEditors: seenli
- * @LastEditTime: 2021-01-09 14:21:12
+ * @LastEditTime: 2021-01-11 13:52:36
  * @FilePath: \Ch09\Money.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
+
+// 程序运算时会默认将其他币种改变为美元
 
 #include "Money.h"
 #include <algorithm>
