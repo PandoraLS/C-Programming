@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2021-01-11 19:26:07
  * @LastEditors: seenli
- * @LastEditTime: 2021-01-11 22:42:19
+ * @LastEditTime: 2021-01-11 23:15:15
  * @FilePath: \Ch10\ch10_drill.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -119,7 +119,7 @@ try {
 
     // // 将points写入文件
     string filename = "drill_out.txt";
-    // write_to_file(original_points, filename);
+    write_to_file(original_points, filename);
 
     // 从文件中读取points
     vector<Point> processed_points;
