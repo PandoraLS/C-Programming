@@ -1,12 +1,12 @@
 <!--
  * @Author: your name
  * @Date: 2020-09-20 16:10:02
- * @LastEditTime: 2021-01-10 23:11:30
+ * @LastEditTime: 2021-01-11 21:37:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \Ch07d:\code\C-Programming\README.md
+ * @FilePath: \chapter10c:\Education\code\C-Programming\README.md
 -->
-# C-Programming
+# C++ Programming
 Principles and Practice Using C++ (Second Edition)
 
 每章的代码都需要一个vs code单独打开，这里只是简单的语法学习，写的也只是一些demo级别的代码
@@ -22,6 +22,8 @@ C-posix/ 是为了使用多线程而使用的thread为posix的结构
 vscode_env/ 实际上是`.vscode/`环境，由于每个电脑上的c++编译路径不同，所以`.vscode/`添加到了`.gitignore`中
 
 参考链接：
-[PPP](https://github.com/thelastpolaris/Programming-Principles-and-Practice-Using-C-)
-[PPP2](https://github.com/Jtaim/Programming-Principles-and-Practice-Using-Cpp)
-[PPP3](https://github.com/bewuethr/stroustrup-ppp)
+
+[PPP_01_Edition](https://github.com/bewuethr/stroustrup-ppp)：第一版, 包含所有章节, 基本满足要求
+
+
+[PPP_02_Edition](https://github.com/Jtaim/Programming-Principles-and-Practice-Using-Cpp)：第二版, 只到第12章
