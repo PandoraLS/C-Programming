@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2021-01-14 15:19:32
  * @LastEditors: seenli
- * @LastEditTime: 2021-01-14 16:20:02
+ * @LastEditTime: 2021-01-14 20:40:21
  * @FilePath: \Ch10\ch10_ex06.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -202,16 +202,15 @@ bool counter_illegal(int counter, char ch)
     }
 }
 
-// test if string is valid roman numeral, calculate its value
 // 罗马数字到int值得转换, 确定其是否为罗马数字
 int roman_int_to_int(const string& s)
 {
     if (s.size()==0) error("roman_to_int: empty string");
     if (s.size()==1) return get_value(s[0]);
 
-    int counter = 1;    // keep track of how often a letter is repeated
+    int counter = 1;    // 记录字母重复的概率
     int val = get_value(s[s.size()-1]);
-    int min_val = val;  // keep track of smallest allowed value of letter
+    int min_val = val;  // 记录字母允许的最小值
 
     // traverse string, starting at end
     for (int i = s.size()-2; i>=0; --i) {
