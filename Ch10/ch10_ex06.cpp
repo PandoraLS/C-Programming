@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2021-01-14 15:19:32
  * @LastEditors: seenli
- * @LastEditTime: 2021-01-14 20:40:21
+ * @LastEditTime: 2021-01-15 19:29:36
  * @FilePath: \Ch10\ch10_ex06.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -11,6 +11,7 @@
     Chapter 10, exercise 06: 
     define Roman_int class for Roman numerals
     provide << and >> and an as_int() member
+    ch10_ex07.cpp运行的时候需要链接ch10_ex06.cpp, 所以将main()给注释掉了
 */
 
 #include "ch10_ex06.h"
@@ -283,19 +284,19 @@ void test_output()
 }
 
 
-int main()
-try {
-    test_output();
-    system("pause");
-    return 0;
-}
-catch (exception& e) {
-	cerr << "exception: " << e.what() << endl;
-	keep_window_open();
-	return 1;
-}
-catch (...) {
-	cerr << "exception\n";
-	keep_window_open();
-	return 2;
-}
+// int main()
+// try {
+//     test_output();
+//     system("pause");
+//     return 0;
+// }
+// catch (exception& e) {
+// 	cerr << "exception: " << e.what() << endl;
+// 	keep_window_open();
+// 	return 1;
+// }
+// catch (...) {
+// 	cerr << "exception\n";
+// 	keep_window_open();
+// 	return 2;
+// }
