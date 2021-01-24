@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2021-01-23 17:20:11
  * @LastEditors: seenli
- * @LastEditTime: 2021-01-23 18:23:46
+ * @LastEditTime: 2021-01-24 11:26:40
  * @FilePath: \Ch13\ch13_ex01.cpp
  * @Description: Programming Principles and Practice Using C++ Second Edition
  */
@@ -21,7 +21,7 @@
 
 #include "../includes/std_lib_facilities.h"
 
-char* strdup(const char* s) {
+char* strdupl(const char* s) {
     // 获取s的size
     int i{};
     const char* p = s;
@@ -53,8 +53,8 @@ char* findx(const char* s, const char* x) {
     return 0;                                                               // 达到s的end
 }
 
-int strcmp(const char* s1, const char* s2) {
-    if (s1 == 0 || s2 == 0) error("Null pointer sent to strcmp()");
+int strcomp(const char* s1, const char* s2) {
+    if (s1 == 0 || s2 == 0) error("Null pointer sent to strcomp()");
     for (int i = 0; *(s1 + i); ++i) {
         // if only s1 ends or s1[i]<s2[i], s1<s2
         if (*(s1 + i) == 0 && *(s2 + i) || *(s1 + i) < *(s2 + i)) return -1;
@@ -76,7 +76,7 @@ int main()
 try {
     // test exercise 1
     char s[] = "Test";
-    char* s_cpy = strdup(s);
+    char* s_cpy = strdupl(s);
     print_str(s_cpy);
     cout << "\n";
     delete[] s_cpy;
@@ -94,7 +94,7 @@ try {
     char a[max], b[max];
     cout << "输入的a.size和b.size必须小于等于5\n";
     while (cin >> a >> b) {
-        int comp = strcmp(a, b);
+        int comp = strcomp(a, b);
         switch (comp) {
             case -1:
                 cout << a << " < " << b << endl;
@@ -106,7 +106,7 @@ try {
                 cout << a << " > " << b << endl;
                 break;
             default:
-                error("invalid result returned by strcmp");
+                error("invalid result returned by strcomp");
                 break;
         }
     }
