@@ -20,4 +20,6 @@ int main()
         cout << word << " ";
     }
     cout << endl;
+    system("pause");
+    return 0;
 }
