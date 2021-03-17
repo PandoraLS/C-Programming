@@ -2,9 +2,13 @@
  * @Author: seenli
  * @Date: 2021-03-16 21:48:03
  * @LastEditors: seenli
- * @LastEditTime: 2021-03-16 21:51:22
+ * @LastEditTime: 2021-03-17 13:07:43
  * @FilePath: \C-posix\thread_3.cpp
  */
+
+/*
+    ref: https://www.runoob.com/cplusplus/cpp-multithreading.html
+*/
 
 #include <iostream>
 #include <cstdlib>
