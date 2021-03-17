@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2021-03-17 17:19:50
  * @LastEditors: seenli
- * @LastEditTime: 2021-03-17 18:05:33
+ * @LastEditTime: 2021-03-17 21:03:49
  * @FilePath: \C-posix\test6.c
  */
 
@@ -37,11 +37,16 @@ int main() {
         printf("%d ", *(q + i));
     }
 
-    printf("\n交换两个数组的指针后\n");
-    Change(x, y); // 功效等同于下面三行
+    printf("\n交换两个数组的指针后，第1次交换\n");
+    Change(x, y); // 方法一
+    // 方法二
     // int *tmp = p;
     // p = q;
     // q = tmp;
+
+    // 方法三
+    // p = b;
+    // q = a;
 
     for (int i = 0; i < 4; i++){
         printf("%d ", *(p + i));
@@ -51,6 +56,16 @@ int main() {
         printf("%d ", *(q + i));
     }
 
+
+    printf("\n第2次交换\n");
+    Change(x, y); 
+    for (int i = 0; i < 4; i++){
+        printf("%d ", *(p + i));
+    }
+    printf("\n------------------\n");
+    for (int i = 0; i < 4; i++){
+        printf("%d ", *(q + i));
+    }
 
     printf("\n");
     system("pause");

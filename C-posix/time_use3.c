@@ -2,7 +2,7 @@
  * @Author: seenli
  * @Date: 2021-03-17 13:57:34
  * @LastEditors: seenli
- * @LastEditTime: 2021-03-17 13:59:41
+ * @LastEditTime: 2021-03-17 21:00:59
  * @FilePath: \C-posix\time_use3.c
  */
 
@@ -22,7 +22,6 @@ int main()
 	}
     sleep(3);
 	endTime = clock();
-
     printf("Totle Time %f second\n", (double)(endTime - startTime) / CLOCKS_PER_SEC);
 	// cout << "Totle Time : " <<(double)(endTime - startTime) / CLOCKS_PER_SEC << "s" << endl;
 	system("pause");

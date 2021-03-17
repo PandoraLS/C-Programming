@@ -1,9 +1,9 @@
 /*
  * @Author: seenli
- * @Date: 2021-03-17 13:30:57
+ * @Date: 2021-03-17 21:48:48
  * @LastEditors: seenli
- * @LastEditTime: 2021-03-17 20:20:39
- * @FilePath: \C-posix\thread_7_2.c
+ * @LastEditTime: 2021-03-17 22:22:28
+ * @FilePath: \C-posix\thread_7_3.c
  */
 
 
@@ -13,6 +13,8 @@
     ref: https://www.geeksforgeeks.org/multithreading-c-2/
     gcc thread_7_2.c -lpthread -o thread_7_2.exe
 	.\thread_7_2.exe
+
+    研究函数参数的传递
 */
 
 #include <stdio.h> 
@@ -27,37 +29,46 @@ int g = 0;
 void *myThreadFun(void *vargp) 
 { 
 	// Store the value argument passed to this thread 
-	int *myid = (int *)vargp; 
+	// int *num_p = (int *)vargp; 
+	// int tmp = *num_p;
 
-	int tmp = *myid;
+    int *p = (int *)vargp;
+
+    for (int j = 0; j < 4; j++) {
+        printf("%d ", *(p + j));
+    }
+    printf("\n");
 
 	// Let us create a static variable to observe its changes 
 	static int s = 0; 
 
 	// Change static and global variables 
 	++s; ++g; 
-    
-	// Print the argument, static and global variables 
-	printf("Thread ID: %d, Static: %d, Global: %d\n", *myid, ++s, ++g); 
+
+    printf("全局变量与静态变量:g: %d, s: %d\n", g, s);
 } 
 
 int main() 
 { 
 	int i; 
 	pthread_t tid1 = 1; 
-	pthread_t tid2 = 2;
+
+    int num = 111;
+    int *num_p = &num;
+    // printf("num: %d\n", num);
+    // printf("*num_p: %d\n", *num_p);
+
+
+    int a[] = {1, 2, 3, 4};
+    int *p = a;
 	// Let us create three threads 
 	// 参数依次是：创建的线程id，线程参数，调用的函数，传入的函数参数
-	pthread_create(&tid1, NULL, myThreadFun, (void *)&tid1); 
+	pthread_create(&tid1, NULL, myThreadFun, (void *)p); // 输入p或a都是对的
+	pthread_create(&tid1, NULL, myThreadFun, (void *)a); 
+	// pthread_create(&tid1, NULL, myThreadFun, (void *)tidp); 
 	printf("\n");
-	pthread_create(&tid2, NULL, myThreadFun, (void *)&tid2); 
-	printf("\n");
-	// pthread_create(&tid, NULL, myThreadFun, (void *)&tid); 
 
-	
-
-	//等各个线程退出后，进程才结束，否则进程强制结束了，线程可能还没反应过来；
-	pthread_exit(NULL); 
+	pthread_join(tid1, NULL);
     system("pause");
 	return 0; 
 } 
